@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.elvea.repository.UserSessionRepository">
+    <sql id="entityColumns">uss_id, uss_session_id, uss_username, uss_host, uss_last_access_time, uss_start_time, uss_end_time</sql>
+
+    <resultMap id="entityResultMap" type="UserSession">
+        <id property="id" column="uss_id"/>
+        <id property="sessionId" column="uss_session_id"/>
+        <id property="username" column="uss_username"/>
+        <id property="host" column="uss_host"/>
+        <id property="lastAccessTime" column="uss_last_access_time"/>
+        <id property="startTime" column="uss_start_time"/>
+        <id property="endTime" column="uss_end_time"/>
+    </resultMap>
+
+    <select id="findById" resultMap="entityResultMap">
+        select
+        <include refid="entityColumns"/>
+        from sys_users_session
+        where uss_id = #{id}
+    </select>
+
+    <select id="findBySessionId" resultMap="entityResultMap">
+        select
+        <include refid="entityColumns"/>
+        from sys_users_session
+        where uss_session_id = #{sessionId}
+    </select>
+
+    <select id="findByPage" resultMap="entityResultMap">
+        select
+        <include refid="entityColumns"/>
+        from sys_users_session
+    </select>
+
+    <select id="findByUsername" resultMap="entityResultMap">
+        select
+        <include refid="entityColumns"/>
+        from sys_users_session
+        where uss_username = #{username}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="UserSession">
+        insert into sys_users_session (
+        uss_session_id, uss_username, uss_host, uss_last_access_time, uss_start_time, uss_end_time
+        ) values (
+        #{sessionId}, #{username}, #{host}, #{lastAccessTime}, #{startTime}, #{endTime}
+        )
+    </insert>
+
+    <update id="update" parameterType="UserSession">
+        update sys_users_session set
+        uss_session_id = #{sessionId}, uss_username = #{username},
+        uss_host = #{host}, uss_last_access_time = #{lastAccessTime},
+        uss_start_time = #{startTime}, uss_end_time = #{endTime} where uss_id = #{id}
+    </update>
+</mapper>

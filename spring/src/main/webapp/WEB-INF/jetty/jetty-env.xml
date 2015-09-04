@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN"
+        "http://www.eclipse.org/jetty/configure.dtd">
+<Configure id="webAppCtx" class="org.eclipse.jetty.webapp.WebAppContext">
+    <New id="datasource" class="org.eclipse.jetty.plus.jndi.Resource">
+        <Arg>jdbc/ds</Arg>
+        <Arg>
+            <New class="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
+                <Set name="Url">jdbc:mysql://localhost:3306/spring</Set>
+                <Set name="User">test</Set>
+                <Set name="Password">test</Set>
+            </New>
+        </Arg>
+    </New>
+</Configure>
