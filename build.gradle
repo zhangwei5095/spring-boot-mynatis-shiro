@@ -1,13 +1,14 @@
 buildscript {
     repositories {
         mavenLocal()
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath("org.gradle.api.plugins:gradle-tomcat-plugin:1.2.5")
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+        classpath('org.springframework:springloaded:1.2.4.RELEASE')
     }
 }
 
@@ -16,8 +17,8 @@ allprojects {
 
     repositories {
         mavenLocal()
-        jcenter()
         mavenCentral()
+        jcenter()
     }
 
     ext {
@@ -29,7 +30,7 @@ allprojects {
         log4j2Version = "2.3"
         slf4jVersion = "1.7.12"
         sitemeshVersion = "3.0.1"
-        jodatimeVersion = "2.8"
+        jodatimeVersion = "2.8.2"
         ehcacheVersion = "2.10.0"
         mysqlVersion = "5.1.36"
         shiroVersion = "1.2.4"
@@ -40,6 +41,8 @@ allprojects {
         webjarsJqueryVersion = "2.1.4"
         webjarsBootstrapVersion = "3.3.5"
         webjarsFontAwesomeVersion = "4.4.0"
+
+        javaxJspApiVersion = "2.3.0"
 
         commonsIoVersion = "2.4"
         commonsLangVersion = "3.4"
@@ -60,6 +63,13 @@ project("spring") {
     apply plugin: "java"
     apply plugin: 'spring-boot'
     apply plugin: "war"
+
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+        }
+    }
 
     compileJava {
         sourceCompatibility = 1.8
@@ -133,7 +143,7 @@ project("spring") {
         compile("org.apache.shiro:shiro-spring:${shiroVersion}")
         compile("org.apache.shiro:shiro-web:${shiroVersion}")
         compile("org.apache.shiro:shiro-ehcache:${shiroVersion}") {
-            exclude group: 'net.sf.ehcache:ehcache', module: 'ehcache-core'
+            exclude group: 'net.sf.ehcache', module: 'ehcache-core'
         }
         compile("org.mybatis:mybatis:${mybatisVersion}")
         compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
@@ -146,7 +156,7 @@ project("spring") {
         // javax
         compile("javax.servlet:jstl")
         compile("javax.servlet:javax.servlet-api")
-        compile("javax.servlet.jsp:javax.servlet.jsp-api:2.3.0")
+        compile("javax.servlet.jsp:javax.servlet.jsp-api:${javaxJspApiVersion}")
 
         // tomcat
         providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") {
@@ -165,6 +175,4 @@ project("spring") {
         // test
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
-
 }
-

@@ -15,7 +15,7 @@
         <div class="col-lg-2 sidebar">
             <%@ include file="../views/commons/sidebar.jsp" %>
         </div>
-        <div class="col-lg-10 main">
+        <div class="col-lg-10 col-lg-offset-2 main">
             <sitemesh:write property='body'/>
         </div>
     </div>
