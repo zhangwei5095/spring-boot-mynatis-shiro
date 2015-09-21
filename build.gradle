@@ -7,7 +7,7 @@ buildscript {
 
     dependencies {
         classpath("org.gradle.api.plugins:gradle-tomcat-plugin:1.2.5")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE")
         classpath('org.springframework:springloaded:1.2.4.RELEASE')
     }
 }
@@ -26,17 +26,18 @@ allprojects {
 
         tomcatVersion = "8.0.26"
 
-        jacksonVersion = "2.6.1"
+        jacksonVersion = "2.6.2"
         log4j2Version = "2.3"
         slf4jVersion = "1.7.12"
         sitemeshVersion = "3.0.1"
+        guavaVersion = "18.0"
         jodatimeVersion = "2.8.2"
         ehcacheVersion = "2.10.0"
         mysqlVersion = "5.1.36"
         shiroVersion = "1.2.4"
         druidVersion = "1.0.15"
         mybatisVersion = "3.3.0"
-        mybatisSpringVersion = "1.2.2"
+        mybatisSpringVersion = "1.2.3"
 
         webjarsJqueryVersion = "2.1.4"
         webjarsBootstrapVersion = "3.3.5"
@@ -51,7 +52,7 @@ allprojects {
         commonsBeanutilsVersion = "1.9.2"
 
         springVersion = "4.1.7.RELEASE"
-        springBootVersion = "1.2.5.RELEASE"
+        springBootVersion = "1.2.6.RELEASE"
     }
 }
 
@@ -133,11 +134,12 @@ project("spring") {
         compile("commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}")
         compile("commons-codec:commons-codec:${commonsCodecVersion}")
 
-        // third party
+        // 3rd party
         compile("com.alibaba:druid:${druidVersion}")
         compile("org.sitemesh:sitemesh:${sitemeshVersion}")
         compile("net.sf.ehcache:ehcache:${ehcacheVersion}")
         compile("joda-time:joda-time:${jodatimeVersion}")
+        compile("com.google.guava:guava:${guavaVersion}")
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("org.apache.shiro:shiro-core:${shiroVersion}")
         compile("org.apache.shiro:shiro-spring:${shiroVersion}")
