@@ -38,6 +38,7 @@ allprojects {
         druidVersion = "1.0.15"
         mybatisVersion = "3.3.0"
         mybatisSpringVersion = "1.2.3"
+        hibernateValidatorVersion = "5.2.2.Final"
 
         webjarsJqueryVersion = "2.1.4"
         webjarsBootstrapVersion = "3.3.5"
@@ -149,6 +150,7 @@ project("spring") {
         }
         compile("org.mybatis:mybatis:${mybatisVersion}")
         compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
+        compile("org.hibernate:hibernate-validator:${hibernateValidatorVersion}")
 
         // webjars
         compile("org.webjars:jquery:${webjarsJqueryVersion}")
