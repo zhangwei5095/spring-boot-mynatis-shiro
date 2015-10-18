@@ -10,6 +10,9 @@ import javax.sql.DataSource;
 import java.sql.Timestamp;
 import java.util.Date;
 
+/**
+ * 基于Spring JDBC的Dao基类
+ */
 @Service
 public class BaseDao {
     protected DataSource dataSource;

@@ -105,9 +105,7 @@ project("webapp") {
         }
 
         // spring
-        compile("org.springframework:spring-core") {
-            exclude group: 'commons-logging', module: 'commons-logging'
-        }
+        compile("org.springframework:spring-core")
         compile("org.springframework:spring-context-support")
 
         // jackson
