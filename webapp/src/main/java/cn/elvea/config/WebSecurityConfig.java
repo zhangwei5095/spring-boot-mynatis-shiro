@@ -94,7 +94,7 @@ public class WebSecurityConfig {
     public CacheManager cacheManager() {
         logger.debug("create cache mamager.");
         EhCacheManager cacheManager = new EhCacheManager();
-        cacheManager.setCacheManager(CacheConfig.cacheManager().getObject());
+        cacheManager.setCacheManager(CacheConfig.ehCacheManagerFactoryBean().getObject());
         return cacheManager;
     }
 

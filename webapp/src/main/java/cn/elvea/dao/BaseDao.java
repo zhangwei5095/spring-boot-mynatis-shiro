@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 /**
- * 基于Spring JDBC的Dao基类
+ * Spring JDBC Dao
  */
 @Service
 public class BaseDao {
