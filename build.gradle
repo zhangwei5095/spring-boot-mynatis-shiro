@@ -8,7 +8,7 @@ buildscript {
 
     dependencies {
         classpath("org.gradle.api.plugins:gradle-tomcat-plugin:1.2.5")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RC1")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.RELEASE")
         classpath('org.springframework:springloaded:1.2.4.RELEASE')
     }
 }
@@ -26,17 +26,17 @@ allprojects {
     ext {
         junitVersion = "4.12"
 
-        tomcatVersion = "8.0.28"
+        tomcatVersion = "8.0.29"
 
         jacksonVersion = "2.6.3"
         log4j2Version = "2.4.1"
         slf4jVersion = "1.7.12"
         sitemeshVersion = "3.0.1"
         guavaVersion = "18.0"
-        jodatimeVersion = "2.9"
+        jodatimeVersion = "2.9.1"
         ehcacheVersion = "2.10.1"
         mysqlVersion = "5.1.37"
-        jedisVersion = "2.7.3"
+        jedisVersion = "2.8.0"
         shiroVersion = "1.2.4"
         druidVersion = "1.0.16"
         mybatisVersion = "3.3.0"
@@ -44,8 +44,8 @@ allprojects {
         hibernateValidatorVersion = "5.2.2.Final"
 
         webjarsJqueryVersion = "2.1.4"
-        webjarsBootstrapVersion = "3.3.5"
-        webjarsFontAwesomeVersion = "4.4.0"
+        webjarsBootstrapVersion = "3.3.6"
+        webjarsFontAwesomeVersion = "4.5.0"
 
         javaxJspApiVersion = "2.3.0"
 
@@ -55,10 +55,10 @@ allprojects {
         commonsFileuploadVersion = "1.3.1"
         commonsBeanutilsVersion = "1.9.2"
 
-        springVersion = "4.2.2.RELEASE"
-        springBootVersion = "1.3.0.RC1"
+        springVersion = "4.2.3.RELEASE"
+        springBootVersion = "1.3.0.RELEASE"
         springSessionVersion = "1.0.2.RELEASE"
-        springDataRedisVersion = "1.6.0.RELEASE"
+        springDataRedisVersion = "1.6.1.RELEASE"
     }
 }
 
