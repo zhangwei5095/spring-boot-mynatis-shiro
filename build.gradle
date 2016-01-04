@@ -42,6 +42,8 @@ allprojects {
         webjarsBootstrapVersion = "3.3.6"
         webjarsFontAwesomeVersion = "4.5.0"
 
+        javaxJstlApiVersion = "1.2"
+        javaxServletApiVersion = "3.1.0"
         javaxJspApiVersion = "2.3.0"
 
         commonsIoVersion = "2.4"
@@ -88,6 +90,7 @@ project("webapp") {
         compile.exclude module: 'spring-boot-starter-logging'
         compile.exclude module: 'spring-boot-starter-tomcat'
         compile.exclude module: 'commons-logging'
+        compile.exclude module: 'h2'
     }
 
     dependencies {
@@ -128,23 +131,13 @@ project("webapp") {
         compile("org.webjars:font-awesome:${webjarsFontAwesomeVersion}")
 
         // javax
-        compile("javax.servlet:jstl")
-        compile("javax.servlet:javax.servlet-api")
-        compile("javax.servlet.jsp:javax.servlet.jsp-api:${javaxJspApiVersion}")
+        compile("javax.servlet:jstl:${javaxJstlApiVersion}")
+        providedCompile("javax.servlet:javax.servlet-api:${javaxServletApiVersion}")
+        providedCompile("javax.servlet.jsp:javax.servlet.jsp-api:${javaxJspApiVersion}")
 
         // tomcat
-        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat") {
-            exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-core'
-            exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-el'
-            exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-logging-juli'
-            exclude group: 'org.apache.tomcat.embed', module: 'tomcat-embed-websocket'
-        }
+        providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
         providedRuntime("org.apache.tomcat.embed:tomcat-embed-jasper")
-        providedRuntime("org.apache.tomcat.embed:tomcat-embed-el")
-        providedRuntime("org.apache.tomcat.embed:tomcat-embed-core")
-        providedRuntime("org.apache.tomcat.embed:tomcat-embed-logging-juli")
-        providedRuntime("org.apache.tomcat.embed:tomcat-embed-websocket")
-        providedRuntime("org.apache.tomcat:tomcat-jdbc")
 
         // test
         testCompile("org.springframework.boot:spring-boot-starter-test")
