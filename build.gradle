@@ -94,6 +94,7 @@ project("webapp") {
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-log4j2")
         compile("org.springframework.boot:spring-boot-starter-redis")
+        compile("org.springframework.boot:spring-boot-starter-aop")
         compile("org.springframework.session:spring-session:${springSessionVersion}")
 
         // commons
