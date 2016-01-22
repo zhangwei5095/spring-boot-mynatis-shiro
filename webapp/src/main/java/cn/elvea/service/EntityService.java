@@ -2,7 +2,7 @@ package cn.elvea.service;
 
 import cn.elvea.domain.IdEntity;
 import cn.elvea.repository.EntityRepository;
-import cn.elvea.utils.Page;
+import cn.elvea.core.utils.Page;
 
 import java.util.List;
 

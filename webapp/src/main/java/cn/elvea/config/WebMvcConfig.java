@@ -1,8 +1,8 @@
 package cn.elvea.config;
 
-import cn.elvea.web.filter.SitemeshFilter;
-import cn.elvea.web.multipart.FileUploadMultipartResolver;
-import cn.elvea.web.servlet.CaptchaServlet;
+import cn.elvea.core.web.filter.SitemeshFilter;
+import cn.elvea.core.web.multipart.FileUploadMultipartResolver;
+import cn.elvea.core.web.servlet.CaptchaServlet;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;

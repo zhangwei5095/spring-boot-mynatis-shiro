@@ -1,7 +1,7 @@
 package cn.elvea.repository;
 
 import cn.elvea.domain.IdEntity;
-import cn.elvea.utils.Page;
+import cn.elvea.core.utils.Page;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,6 +1,6 @@
 package cn.elvea.config;
 
-import cn.elvea.security.*;
+import cn.elvea.core.security.*;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;

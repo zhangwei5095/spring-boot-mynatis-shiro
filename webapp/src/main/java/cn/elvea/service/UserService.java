@@ -3,7 +3,7 @@ package cn.elvea.service;
 import cn.elvea.domain.User;
 import cn.elvea.repository.EntityRepository;
 import cn.elvea.repository.UserRepository;
-import cn.elvea.security.SecurityUtils;
+import cn.elvea.core.security.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

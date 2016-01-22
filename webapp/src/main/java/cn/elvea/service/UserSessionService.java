@@ -3,7 +3,7 @@ package cn.elvea.service;
 import cn.elvea.domain.UserSession;
 import cn.elvea.repository.EntityRepository;
 import cn.elvea.repository.UserSessionRepository;
-import cn.elvea.security.CaptchaFormAuthenticationFilter;
+import cn.elvea.core.security.CaptchaFormAuthenticationFilter;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.springframework.beans.factory.annotation.Autowired;

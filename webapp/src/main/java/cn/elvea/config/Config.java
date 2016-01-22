@@ -1,8 +1,8 @@
 package cn.elvea.config;
 
 import cn.elvea.Application;
-import cn.elvea.core.datasource.DynamicDataSource;
-import cn.elvea.persistence.mybatis.PageInterceptor;
+import cn.elvea.core.persistence.datasource.DynamicDataSource;
+import cn.elvea.core.persistence.mybatis.PageInterceptor;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;

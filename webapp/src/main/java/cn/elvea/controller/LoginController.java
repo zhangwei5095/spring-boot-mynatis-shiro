@@ -1,6 +1,6 @@
 package cn.elvea.controller;
 
-import cn.elvea.security.exception.IncorrectCaptchaException;
+import cn.elvea.core.security.exception.IncorrectCaptchaException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
