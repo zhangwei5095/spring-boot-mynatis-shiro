@@ -21,20 +21,20 @@ allprojects {
     }
 
     ext {
-        tomcatVersion = "8.0.30"
+        tomcatVersion = "8.0.32"
 
         springSessionVersion = "1.0.2.RELEASE"
 
         sitemeshVersion = "3.0.1"
         guavaVersion = "19.0"
-        jodatimeVersion = "2.9.1"
+        jodatimeVersion = "2.9.2"
         ehcacheVersion = "2.10.1"
         mysqlVersion = "5.1.38"
         jedisVersion = "2.8.0"
         shiroVersion = "1.2.4"
         druidVersion = "1.0.16"
-        mybatisVersion = "3.3.0"
-        mybatisSpringVersion = "1.2.3"
+        mybatisVersion = "3.3.1"
+        mybatisSpringVersion = "1.2.4"
         mybatisSpringBootVersion = "1.0.0"
 
         webjarsJqueryVersion = "2.2.0"
