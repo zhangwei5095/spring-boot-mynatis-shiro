@@ -26,8 +26,8 @@ import java.util.Properties;
         type = Executor.class,
         method = "query",
         args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class})})
-public class PageInterceptor implements Interceptor {
-    private static Logger logger = LoggerFactory.getLogger(PageInterceptor.class);
+public class PageableInterceptor implements Interceptor {
+    private static Logger logger = LoggerFactory.getLogger(PageableInterceptor.class);
 
     static int MAPPED_STATEMENT_INDEX = 0;
     static int PARAMETER_INDEX = 1;
@@ -43,13 +43,11 @@ public class PageInterceptor implements Interceptor {
 
     @Override
     public Object plugin(Object o) {
-        if (Executor.class.isAssignableFrom(o.getClass())) {
-            return Plugin.wrap(new PageExecutor((Executor) o), this);
-        }
         return Plugin.wrap(o, this);
     }
 
     @Override
+    @SuppressWarnings({"unchecked"})
     public Object intercept(Invocation invocation) throws Throwable {
         final Executor executor = (Executor) invocation.getTarget();
         final Object[] queryArgs = invocation.getArgs();
@@ -79,6 +77,13 @@ public class PageInterceptor implements Interceptor {
                     MappedStatement newMappedStatement = copyFromMappedStatement(mappedStatement, new BoundSqlSqlSource(newBoundSql));
                     queryArgs[ROWBOUNDS_INDEX] = new RowBounds(RowBounds.NO_ROW_OFFSET, RowBounds.NO_ROW_LIMIT);
                     queryArgs[MAPPED_STATEMENT_INDEX] = newMappedStatement;
+
+                    // 处理结果集,把结果集赋值给Page的rows属性
+                    Object result = invocation.proceed();
+                    if (result instanceof List<?>) {
+                        page.setRows((List) result);
+                    }
+                    return result;
                 }
             }
         }

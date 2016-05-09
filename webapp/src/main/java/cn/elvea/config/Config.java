@@ -2,7 +2,7 @@ package cn.elvea.config;
 
 import cn.elvea.Application;
 import cn.elvea.core.persistence.datasource.DynamicDataSource;
-import cn.elvea.core.persistence.mybatis.PageInterceptor;
+import cn.elvea.core.persistence.mybatis.PageableInterceptor;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -164,7 +164,7 @@ public class Config implements TransactionManagementConfigurer {
 
     private Interceptor[] getMyBatisPlugins() {
         Interceptor[] interceptors = new Interceptor[1];
-        interceptors[0] = new PageInterceptor();
+        interceptors[0] = new PageableInterceptor();
         return interceptors;
     }
 }
