@@ -23,6 +23,9 @@ allprojects {
     ext {
         tomcatVersion = "8.0.33"
 
+        assertjVersion = "3.4.1"
+        mockitoVersion = "1.10.19"
+
         springVersion = "4.2.6.RELEASE"
         springBootVersion = "1.3.4.RELEASE"
         springDataVersion = "Hopper-SR1"
@@ -45,6 +48,7 @@ allprojects {
         webjarsBootstrapVersion = "3.3.6"
         webjarsFontAwesomeVersion = "4.6.2"
 
+        javaxJtaVersion = "1.2"
         javaxJstlApiVersion = "1.2"
         javaxServletApiVersion = "3.1.0"
         javaxJspApiVersion = "2.3.0"
@@ -105,8 +109,19 @@ project("core") {
     dependencies {
         compile("org.slf4j:slf4j-api")
         compile("org.springframework:spring-jdbc")
+        compile("org.springframework:spring-orm")
+        compile("org.springframework.data:spring-data-jpa")
         compile("org.hibernate:hibernate-core")
+        compile("org.hibernate:hibernate-entitymanager")
         compile("javax.servlet:javax.servlet-api:${javaxServletApiVersion}")
+        compile("mysql:mysql-connector-java:${mysqlVersion}")
+        compile("javax.transaction:javax.transaction-api:${javaxJtaVersion}")
+
+        // test
+        testCompile("org.springframework:spring-test")
+        testCompile("junit:junit")
+        testCompile("org.assertj:assertj-core:${assertjVersion}")
+        testCompile("org.mockito:mockito-core:${mockitoVersion}")
     }
 }
 

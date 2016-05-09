@@ -4,3 +4,4 @@
 *.iml
 /build
 /webapp/build
+/core/build
