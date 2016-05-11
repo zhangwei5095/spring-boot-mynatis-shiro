@@ -1,6 +1,6 @@
 package cn.elvea.entity;
 
-import cn.elvea.core.persistence.jpa.BaseEntity;
+import cn.elvea.core.persistence.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

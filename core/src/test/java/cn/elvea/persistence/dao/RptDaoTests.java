@@ -1,13 +1,13 @@
-package cn.elvea.persistence.jpa.dao;
+package cn.elvea.persistence.dao;
 
 import cn.elvea.test.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class JpaRoleDaoTests extends BaseTest {
+public class RptDaoTests extends BaseTest {
     @Autowired
-    JpaRoleDao jpaRoleDao;
+    RptDao jdbcRptDao;
 
     @Test
     public void test() {

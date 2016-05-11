@@ -1,13 +1,13 @@
-package cn.elvea.persistence.jpa.repository;
+package cn.elvea.persistence.repository;
 
 import cn.elvea.test.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class JpaRoleRepositoryTests extends BaseTest {
+public class RoleRepositoryTests extends BaseTest {
     @Autowired
-    JpaRoleRepository jpaRoleRepository;
+    RoleRepository roleRepository;
 
     @Test
     public void test() {

@@ -116,6 +116,7 @@ project("core") {
         compile("javax.servlet:javax.servlet-api:${javaxServletApiVersion}")
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("javax.transaction:javax.transaction-api:${javaxJtaVersion}")
+        compile("com.google.guava:guava:${guavaVersion}")
 
         // test
         testCompile("org.springframework:spring-test")

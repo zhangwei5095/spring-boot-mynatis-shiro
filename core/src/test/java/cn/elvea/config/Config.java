@@ -1,6 +1,6 @@
 package cn.elvea.config;
 
-import cn.elvea.core.persistence.jpa.repository.BaseRepositoryImpl;
+import cn.elvea.core.persistence.repository.BaseRepositoryImpl;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +32,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"cn.elvea"})
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories(basePackages = "cn.elvea.persistence.jpa.repository", repositoryBaseClass = BaseRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = "cn.elvea.persistence.repository", repositoryBaseClass = BaseRepositoryImpl.class)
 
 public class Config implements TransactionManagementConfigurer {
     @Autowired

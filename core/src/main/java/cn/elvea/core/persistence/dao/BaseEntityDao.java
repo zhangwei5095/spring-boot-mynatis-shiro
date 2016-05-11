@@ -1,4 +1,4 @@
-package cn.elvea.core.persistence.jdbc;
+package cn.elvea.core.persistence.dao;
 
 import cn.elvea.core.persistence.IdEntity;
 import org.springframework.jdbc.support.KeyHolder;

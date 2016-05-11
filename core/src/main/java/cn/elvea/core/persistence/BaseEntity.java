@@ -1,6 +1,4 @@
-package cn.elvea.core.persistence.jpa;
-
-import cn.elvea.core.persistence.AbstractEntity;
+package cn.elvea.core.persistence;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

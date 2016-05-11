@@ -1,4 +1,4 @@
-package cn.elvea.persistence.jpa.repository;
+package cn.elvea.persistence.repository;
 
 import cn.elvea.entity.User;
 import cn.elvea.test.BaseTest;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
-public class JpaUserRepositoryTests extends BaseTest {
+public class UserRepositoryTests extends BaseTest {
     @Autowired
-    JpaUserRepository jpaUserRepository;
+    UserRepository userRepository;
 
     @Test
     @Transactional
@@ -18,15 +18,15 @@ public class JpaUserRepositoryTests extends BaseTest {
     public void test() {
         User user = new User();
         user.setUsername("test");
-        jpaUserRepository.save(user);
+        userRepository.save(user);
 
-        user = jpaUserRepository.findByUsername("test");
+        user = userRepository.findByUsername("test");
         Assert.assertNotNull(user);
         Assert.assertNotNull(user.getId());
 
-        jpaUserRepository.delete(user.getId());
+        userRepository.delete(user.getId());
 
-        user = jpaUserRepository.findByUsername("test");
+        user = userRepository.findByUsername("test");
         Assert.assertNull(user);
     }
 }
