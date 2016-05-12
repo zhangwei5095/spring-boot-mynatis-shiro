@@ -1,10 +1,12 @@
 package cn.elvea.core.persistence.repository;
 
+import cn.elvea.core.persistence.repository.support.ReturningWork;
 import cn.elvea.core.persistence.repository.support.NativeWork;
 import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningWork;
 import cn.elvea.core.persistence.repository.support.Work;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 
@@ -14,29 +16,129 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 拓展Spring Data JPA,封装一些基本的操作简化开发
+ *
+ * @param <T>
+ * @param <PK>
+ */
 @NoRepositoryBean
 public interface BaseRepository<T, PK extends Serializable> extends JpaRepository<T, PK> {
-    void execute(Work action) throws DataAccessException;
+    /**
+     * 执行当前会话的原生JPA操作
+     *
+     * @param work 需要执行的操作
+     * @throws DataAccessException
+     */
+    void execute(final Work work) throws DataAccessException;
 
-    <E> E execute(ReturningWork<E> action) throws DataAccessException;
+    /**
+     * 执行当前会话的原生JPA操作,带返回值
+     *
+     * @param work 需要执行的操作
+     * @throws DataAccessException
+     */
+    <E> E execute(final ReturningWork<E> work) throws DataAccessException;
 
-    void execute(final NativeWork action) throws SQLException, DataAccessException;
+    /**
+     * 执行当前会话的原生JDBC操作
+     *
+     * @param work 需要执行的操作
+     * @throws DataAccessException
+     */
+    void execute(final NativeWork work) throws SQLException, DataAccessException;
 
-    <E> E execute(final ReturningNativeWork<E> action) throws SQLException, DataAccessException;
+    /**
+     * 执行当前会话的原生JDBC操作,带返回值
+     *
+     * @param work 需要执行的操作
+     * @throws DataAccessException
+     */
+    <E> E execute(final ReturningNativeWork<E> work) throws SQLException, DataAccessException;
 
+    /**
+     * 执行JPQL
+     *
+     * @throws DataAccessException
+     */
     int execute(final String jpql) throws DataAccessException;
 
-    int execute(final String jpql, Object[] params) throws DataAccessException;
+    /**
+     * 执行JPQL
+     *
+     * @throws DataAccessException
+     */
+    int execute(final String jpql, final Object[] params) throws DataAccessException;
 
-    int execute(final String jpql, Map<String, Object> params) throws DataAccessException;
+    /**
+     * 执行JPQL
+     *
+     * @throws DataAccessException
+     */
+    int execute(final String jpql, final Map<String, Object> params) throws DataAccessException;
 
-    <E> List<E> query(String sql, Object[] params) throws DataAccessException;
+    /**
+     * 执行查询
+     *
+     * @throws DataAccessException
+     */
+    <E> List<E> query(final String jpql) throws DataAccessException;
 
-    <E> List<E> query(String sql, Map<String, Object> params) throws DataAccessException;
+    /**
+     * 执行查询
+     *
+     * @throws DataAccessException
+     */
+    <E> List<E> query(final String jpql, final Object[] params) throws DataAccessException;
 
-    <E> E queryForObject(String sql, Object[] params) throws DataAccessException;
+    /**
+     * 执行查询
+     *
+     * @throws DataAccessException
+     */
+    <E> List<E> query(final String jpql, final Map<String, Object> params) throws DataAccessException;
 
-    <E> E queryForObject(String sql, Map<String, Object> params) throws DataAccessException;
+    /**
+     * 执行查询,返回单个对象
+     *
+     * @throws DataAccessException
+     */
+    <E> E queryForObject(final String jpql) throws DataAccessException;
+
+    /**
+     * 执行查询,返回单个对象
+     *
+     * @throws DataAccessException
+     */
+    <E> E queryForObject(final String jpql, final Object[] params) throws DataAccessException;
+
+    /**
+     * 执行查询,返回单个对象
+     *
+     * @throws DataAccessException
+     */
+    <E> E queryForObject(final String jpql, final Map<String, Object> params) throws DataAccessException;
+
+    /**
+     * 执行查询,返回分页对象
+     *
+     * @throws DataAccessException
+     */
+    <E> Page<E> queryPage(final String jpql, final Pageable pageable) throws DataAccessException;
+
+    /**
+     * 执行查询,返回分页对象
+     *
+     * @throws DataAccessException
+     */
+    <E> Page<E> queryPage(final String jpql, final Pageable pageable, final Object[] params) throws DataAccessException;
+
+    /**
+     * 执行查询,返回分页对象
+     *
+     * @throws DataAccessException
+     */
+    <E> Page<E> queryPage(final String jpql, final Pageable pageable, final Map<String, Object> params) throws DataAccessException;
 
     /**
      * 获取数据库元数据

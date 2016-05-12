@@ -6,7 +6,7 @@ create table roles (
     code        varchar(255),
     description varchar(255),
     createdAt   datetime,
-    createdBy   int,
+    updatedAt   datetime,
     constraint pk_roles_id primary key (id)
 );
 
@@ -16,10 +16,11 @@ create unique index idx_roles_code on roles (code);
 drop table if exists users;
 
 create table users (
-    id        int         not null auto_increment,
-    username  varchar(50) not null,
-    createdAt datetime,
-    createdBy int,
+    id          int         not null auto_increment,
+    username    varchar(50) not null,
+    description varchar(255),
+    createdAt   datetime,
+    updatedAt   datetime,
     constraint pk_users_id primary key (id)
 );
 

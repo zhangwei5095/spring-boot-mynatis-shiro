@@ -6,5 +6,5 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public interface NativeWork {
-    void doNativeWork(Connection con) throws SQLException, DataAccessException;
+    void execute(Connection con) throws SQLException, DataAccessException;
 }

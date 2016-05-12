@@ -1,6 +1,6 @@
-package cn.elvea.entity;
+package cn.elvea.domain;
 
-import cn.elvea.core.persistence.BaseEntity;
+import cn.elvea.core.domain.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

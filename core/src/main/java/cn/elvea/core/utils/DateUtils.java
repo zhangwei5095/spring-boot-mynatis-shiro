@@ -1,4 +1,4 @@
 package cn.elvea.core.utils;
 
-public class RegUtils {
+public class DateUtils {
 }

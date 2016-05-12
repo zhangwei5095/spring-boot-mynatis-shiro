@@ -1,7 +1,7 @@
 package cn.elvea.persistence.dao;
 
 import cn.elvea.core.persistence.dao.BaseEntityDao;
-import cn.elvea.entity.User;
+import cn.elvea.domain.User;
 import org.springframework.stereotype.Repository;
 
 @Repository(value = "jdbcUserDao")

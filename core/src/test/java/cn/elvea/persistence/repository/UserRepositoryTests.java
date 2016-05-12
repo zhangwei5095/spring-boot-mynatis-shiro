@@ -1,6 +1,6 @@
 package cn.elvea.persistence.repository;
 
-import cn.elvea.entity.User;
+import cn.elvea.domain.User;
 import cn.elvea.test.BaseTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
+@Commit
 public class UserRepositoryTests extends BaseTest {
     @Autowired
     UserRepository userRepository;
 
     @Test
-    @Transactional
-    @Commit
-    public void test() {
+    public void testCrud() {
         User user = new User();
         user.setUsername("test");
         userRepository.save(user);

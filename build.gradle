@@ -110,6 +110,7 @@ project("core") {
         compile("org.slf4j:slf4j-api")
         compile("org.springframework:spring-jdbc")
         compile("org.springframework:spring-orm")
+        compile("org.springframework:spring-webmvc")
         compile("org.springframework.data:spring-data-jpa")
         compile("org.hibernate:hibernate-core")
         compile("org.hibernate:hibernate-entitymanager")
@@ -117,6 +118,13 @@ project("core") {
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("javax.transaction:javax.transaction-api:${javaxJtaVersion}")
         compile("com.google.guava:guava:${guavaVersion}")
+
+        // commons
+        compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
+        compile("commons-fileupload:commons-fileupload:${commonsFileuploadVersion}")
+        compile("commons-io:commons-io:${commonsIoVersion}")
+        compile("commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}")
+        compile("commons-codec:commons-codec:${commonsCodecVersion}")
 
         // test
         testCompile("org.springframework:spring-test")

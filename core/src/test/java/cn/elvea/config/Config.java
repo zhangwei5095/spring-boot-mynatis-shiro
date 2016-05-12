@@ -81,7 +81,7 @@ public class Config implements TransactionManagementConfigurer {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("cn.elvea.entity");
+        factory.setPackagesToScan("cn.elvea.domain");
         factory.setDataSource(dataSource());
         factory.setJpaProperties(properties);
         factory.setPersistenceUnitName(persistenceUnitName);
@@ -111,10 +111,10 @@ public class Config implements TransactionManagementConfigurer {
         return dataSource;
     }
 
-    @Value("classpath:database/db-schema.sql")
+    @Value("classpath:db/db-schema.sql")
     private Resource schemaScript;
 
-    @Value("classpath:database/db-data.sql")
+    @Value("classpath:db/db-data.sql")
     private Resource dataScript;
 
     @Bean

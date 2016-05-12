@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class RptDaoTests extends BaseTest {
     @Autowired
-    RptDao jdbcRptDao;
+    RptDao rptDao;
 
     @Test
     public void test() {

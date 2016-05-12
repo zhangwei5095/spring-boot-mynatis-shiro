@@ -1,25 +1,24 @@
 package cn.elvea.persistence.service;
 
-import cn.elvea.core.persistence.repository.BaseRepository;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
 import cn.elvea.core.persistence.repository.support.NativeWork;
 import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
 import cn.elvea.core.persistence.repository.support.ReturningWork;
 import cn.elvea.core.persistence.repository.support.Work;
 import cn.elvea.core.service.BaseEntityService;
 import cn.elvea.core.utils.JdbcUtils;
-import cn.elvea.entity.User;
+import cn.elvea.domain.User;
 import cn.elvea.persistence.repository.UserRepository;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -31,50 +30,62 @@ public class UserService extends BaseEntityService<User, Long> {
     UserRepository userRepository;
 
     @Override
-    protected BaseRepository getRepository() {
+    protected BaseEntityRepository<User, Long> getEntityRepository() {
         return userRepository;
     }
 
     public long testWork() throws SQLException {
-        userRepository.execute((Work) entityManager -> {
-            User user = new User();
-            user.setUsername(String.valueOf(new Date().getTime()));
+        userRepository.execute(new Work() {
+            @Override
+            public void execute(EntityManager entityManager) throws DataAccessException {
+                User user = new User();
+                user.setUsername(String.valueOf(new Date().getTime()));
 
-            entityManager.persist(user);
+                entityManager.persist(user);
+            }
         });
 
-        return userRepository.execute((ReturningWork<Long>) entityManager -> {
-            Query query = entityManager.createQuery(" select count(id) from User ");
-            return (Long) query.getSingleResult();
+        return userRepository.execute(new ReturningWork<Long>() {
+            @Override
+            public Long execute(EntityManager entityManager) throws DataAccessException {
+                Query query = entityManager.createQuery("select count(id) from User ");
+                return (Long) query.getSingleResult();
+            }
         });
     }
 
     public int testNativeWork() throws SQLException {
-        userRepository.execute((NativeWork) con -> {
-            PreparedStatement stmt = null;
-            try {
-                stmt = con.prepareStatement(" insert into users (username) values (?)");
-                stmt.setString(1, String.valueOf(new Date().getTime()));
-                stmt.executeUpdate();
-            } finally {
-                JdbcUtils.close(stmt);
+        userRepository.execute(new NativeWork() {
+            @Override
+            public void execute(Connection con) throws SQLException, DataAccessException {
+                PreparedStatement stmt = null;
+                try {
+                    stmt = con.prepareStatement(" insert into users (username) values (?)");
+                    stmt.setString(1, String.valueOf(new Date().getTime()));
+                    stmt.executeUpdate();
+                } finally {
+                    JdbcUtils.close(stmt);
+                }
             }
         });
 
-        return userRepository.execute((ReturningNativeWork<Integer>) con -> {
-            ResultSet rs = null;
-            PreparedStatement stmt = null;
-            try {
-                stmt = con.prepareStatement(" select count(id) cnt from users ");
-                rs = stmt.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt("cnt");
+        return userRepository.execute(new ReturningNativeWork<Integer>() {
+            @Override
+            public Integer execute(Connection con) throws SQLException, DataAccessException {
+                ResultSet rs = null;
+                PreparedStatement stmt = null;
+                try {
+                    stmt = con.prepareStatement(" select count(id) cnt from users ");
+                    rs = stmt.executeQuery();
+                    if (rs.next()) {
+                        return rs.getInt("cnt");
+                    }
+                } finally {
+                    JdbcUtils.close(rs);
+                    JdbcUtils.close(stmt);
                 }
-            } finally {
-                JdbcUtils.close(rs);
-                JdbcUtils.close(stmt);
+                return 0;
             }
-            return 0;
         });
     }
 
@@ -89,20 +100,23 @@ public class UserService extends BaseEntityService<User, Long> {
             tmpTableName = userRepository.createTempTable(data);
 
             final String temporaryTableName = tmpTableName;
-            return userRepository.execute((ReturningNativeWork<Integer>) con -> {
-                ResultSet rs = null;
-                PreparedStatement stmt = null;
-                try {
-                    stmt = con.prepareStatement(" select count(id) cnt from " + temporaryTableName);
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        return rs.getInt("cnt");
+            return userRepository.execute(new ReturningNativeWork<Integer>() {
+                @Override
+                public Integer execute(Connection con) throws SQLException, DataAccessException {
+                    ResultSet rs = null;
+                    PreparedStatement stmt = null;
+                    try {
+                        stmt = con.prepareStatement(" select count(id) cnt from " + temporaryTableName);
+                        rs = stmt.executeQuery();
+                        if (rs.next()) {
+                            return rs.getInt("cnt");
+                        }
+                    } finally {
+                        JdbcUtils.close(rs);
+                        JdbcUtils.close(stmt);
                     }
-                } finally {
-                    JdbcUtils.close(rs);
-                    JdbcUtils.close(stmt);
+                    return 0;
                 }
-                return 0;
             });
         } finally {
             userRepository.dropTemporaryTable(tmpTableName);
@@ -137,22 +151,25 @@ public class UserService extends BaseEntityService<User, Long> {
 
             final String temporaryTableName = tmpTableName;
 
-            return userRepository.execute((ReturningNativeWork<Integer>) con -> {
-                int cnt = 0;
+            return userRepository.execute(new ReturningNativeWork<Integer>() {
+                @Override
+                public Integer execute(Connection con) throws SQLException, DataAccessException {
+                    int cnt = 0;
 
-                ResultSet rs = null;
-                PreparedStatement stmt = null;
-                try {
-                    stmt = con.prepareStatement(" select count(*) cnt from " + temporaryTableName);
-                    rs = stmt.executeQuery();
-                    if (rs.next()) {
-                        cnt = rs.getInt("cnt");
+                    ResultSet rs = null;
+                    PreparedStatement stmt = null;
+                    try {
+                        stmt = con.prepareStatement(" select count(*) cnt from " + temporaryTableName);
+                        rs = stmt.executeQuery();
+                        if (rs.next()) {
+                            cnt = rs.getInt("cnt");
+                        }
+                    } finally {
+                        JdbcUtils.close(rs);
+                        JdbcUtils.close(stmt);
                     }
-                } finally {
-                    JdbcUtils.close(rs);
-                    JdbcUtils.close(stmt);
+                    return cnt;
                 }
-                return cnt;
             });
         } finally {
             userRepository.dropTemporaryTable(tmpTableName);

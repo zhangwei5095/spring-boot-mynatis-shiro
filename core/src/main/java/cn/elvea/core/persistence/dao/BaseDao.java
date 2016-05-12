@@ -2,11 +2,13 @@ package cn.elvea.core.persistence.dao;
 
 import cn.elvea.core.utils.JdbcUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceUtils;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public abstract class BaseDao {
     JdbcTemplate jdbcTemplate;
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -34,7 +37,12 @@ public abstract class BaseDao {
      * @throws SQLException
      */
     public DatabaseMetaData getDatabaseMetaData() throws SQLException {
-        return jdbcTemplate.execute(JdbcUtils::getDatabaseMetaData);
+        return this.jdbcTemplate.execute(new ConnectionCallback<DatabaseMetaData>() {
+            @Override
+            public DatabaseMetaData doInConnection(Connection con) throws SQLException, DataAccessException {
+                return JdbcUtils.getDatabaseMetaData(con);
+            }
+        });
     }
 
     /**
@@ -44,7 +52,12 @@ public abstract class BaseDao {
      * @throws SQLException
      */
     public String getDatabaseType() throws SQLException {
-        return jdbcTemplate.execute((ConnectionCallback<String>) con -> JdbcUtils.getDatabaseType(JdbcUtils.getDatabaseMetaData(con)));
+        return this.jdbcTemplate.execute(new ConnectionCallback<String>() {
+            @Override
+            public String doInConnection(Connection con) throws SQLException, DataAccessException {
+                return JdbcUtils.getDatabaseType(JdbcUtils.getDatabaseMetaData(con));
+            }
+        });
     }
 
     /**
@@ -55,7 +68,12 @@ public abstract class BaseDao {
      * @throws SQLException
      */
     public String createTempTable(final List<Long> data) throws SQLException {
-        return jdbcTemplate.execute((ConnectionCallback<String>) con -> JdbcUtils.createTemporaryTable(con, data));
+        return this.jdbcTemplate.execute(new ConnectionCallback<String>() {
+            @Override
+            public String doInConnection(Connection con) throws SQLException, DataAccessException {
+                return JdbcUtils.createTemporaryTable(con, data);
+            }
+        });
     }
 
     /**
@@ -66,7 +84,12 @@ public abstract class BaseDao {
      * @throws SQLException
      */
     public String createTempTable(final Map<String, String> nameTypeMap, final List<Map<String, Object>> data) throws SQLException {
-        return jdbcTemplate.execute((ConnectionCallback<String>) con -> JdbcUtils.createTemporaryTable(con, nameTypeMap, data));
+        return this.jdbcTemplate.execute(new ConnectionCallback<String>() {
+            @Override
+            public String doInConnection(Connection con) throws SQLException, DataAccessException {
+                return JdbcUtils.getDatabaseType(JdbcUtils.getDatabaseMetaData(con));
+            }
+        });
     }
 
     /**
@@ -75,10 +98,13 @@ public abstract class BaseDao {
      * @param temporaryTableName 临时表名
      * @throws SQLException
      */
-    public void dropTemporaryTable(final String temporaryTableName) throws SQLException {
-        jdbcTemplate.execute((ConnectionCallback<String>) con -> {
-            JdbcUtils.dropTemporaryTable(con, temporaryTableName);
-            return null;
+    public boolean dropTemporaryTable(final String temporaryTableName) throws SQLException {
+        return this.jdbcTemplate.execute(new ConnectionCallback<Boolean>() {
+            @Override
+            public Boolean doInConnection(Connection con) throws SQLException, DataAccessException {
+                JdbcUtils.dropTemporaryTable(con, temporaryTableName);
+                return true;
+            }
         });
     }
 
