@@ -118,6 +118,10 @@ project("core") {
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("javax.transaction:javax.transaction-api:${javaxJtaVersion}")
         compile("com.google.guava:guava:${guavaVersion}")
+        compile("org.mybatis:mybatis:${mybatisVersion}")
+        compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
+        compile("org.apache.shiro:shiro-web:${shiroVersion}")
+        compile("org.apache.shiro:shiro-spring:${shiroVersion}")
 
         // commons
         compile("org.apache.commons:commons-lang3:${commonsLangVersion}")

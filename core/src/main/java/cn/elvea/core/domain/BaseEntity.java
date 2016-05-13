@@ -7,10 +7,10 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class BaseEntity extends AbstractEntity {
-    protected Long id;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long id;
+
     public Long getId() {
         return id;
     }
