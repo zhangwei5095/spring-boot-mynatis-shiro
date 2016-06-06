@@ -1,8 +1,9 @@
 package cn.elvea.repository;
 
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
 import cn.elvea.domain.Permission;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-public interface PermissionRepository extends EntityRepository<Permission> {
-    Permission findByCode(@Param("code") String code);
+@Repository
+public interface PermissionRepository extends BaseEntityRepository<Permission, Long> {
 }

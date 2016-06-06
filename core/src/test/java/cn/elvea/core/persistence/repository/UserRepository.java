@@ -1,0 +1,9 @@
+package cn.elvea.core.persistence.repository;
+
+import cn.elvea.core.domain.User;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserRepository extends BaseEntityRepository<User, Long> {
+    User findByUsername(String username);
+}

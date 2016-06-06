@@ -1,10 +1,10 @@
 package cn.elvea.repository;
 
 import cn.elvea.domain.User;
-import org.apache.ibatis.annotations.Param;
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends EntityRepository<User> {
-    User findByUsername(@Param("username") String username);
-
-    User findByEmail(@Param("email") String email);
+@Repository
+public interface UserRepository extends BaseEntityRepository<User, Long> {
+    User findByEmployeeNumber(String username);
 }

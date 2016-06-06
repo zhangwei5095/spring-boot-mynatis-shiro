@@ -1,28 +1,52 @@
 package cn.elvea.config;
 
-import cn.elvea.core.web.filter.SitemeshFilter;
-import cn.elvea.core.web.multipart.FileUploadMultipartResolver;
+import cn.elvea.core.web.mvc.WebArgumentResolver;
 import cn.elvea.core.web.servlet.CaptchaServlet;
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import java.util.List;
+
 @Configuration
+@EnableWebMvc
+@EnableSpringDataWebSupport
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
 
-    /**
-     * 视图设置
-     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+        registry.addResourceHandler("/favicon.ico").addResourceLocations("/static/favicon.ico");
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new WebArgumentResolver());
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LocaleChangeInterceptor());
+    }
+
+    @Bean
+    public LocaleResolver localeResolver() {
+        return new SessionLocaleResolver();
+    }
+
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -31,23 +55,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    /**
-     * 扩展已至此上传进度监控
-     */
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new FileUploadMultipartResolver();
-        resolver.setMaxUploadSize(1000000000);
-        return resolver;
-    }
-
-
     @Bean(name = "sitemeshFilter")
     public FilterRegistrationBean sitemeshFilter() {
         FilterRegistrationBean bean = new FilterRegistrationBean();
-        bean.setFilter(new SitemeshFilter());
+        bean.setFilter(new ConfigurableSiteMeshFilter());
         bean.addUrlPatterns("/*");
-        bean.setOrder(1111);
+        bean.addInitParameter("configFile", "/WEB-INF/config/sitemesh/sitemesh.xml");
         return bean;
     }
 

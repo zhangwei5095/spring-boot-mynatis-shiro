@@ -1,10 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="./commons/taglibs.jsp" %>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Index Page</title>
-</head>
-<body>
-<c:out value="Admin Page"></c:out>
-</body>
+    <head>
+        <script type="text/javascript">
+            $(document).ready(function () {
+            })
+        </script>
+    </head>
+    <body>
+        ADMIN
+    </body>
 </html>

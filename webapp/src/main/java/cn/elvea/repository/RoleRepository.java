@@ -1,8 +1,9 @@
 package cn.elvea.repository;
 
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
 import cn.elvea.domain.Role;
-import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
-public interface RoleRepository extends EntityRepository<Role> {
-    Role findByCode(@Param("code") String code);
+@Repository
+public interface RoleRepository extends BaseEntityRepository<Role, Long> {
 }

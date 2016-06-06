@@ -1,18 +1,29 @@
 package cn.elvea.service;
 
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
+import cn.elvea.core.service.BaseEntityService;
 import cn.elvea.domain.Permission;
-import cn.elvea.repository.EntityRepository;
 import cn.elvea.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PermissionService extends EntityService<Permission> {
+@Transactional
+public class PermissionService extends BaseEntityService<Permission, Long> {
     @Autowired
-    PermissionRepository permissionRepository;
+    private PermissionRepository permissionRepository;
 
     @Override
-    public EntityRepository<Permission> getRepository() {
+    protected BaseEntityRepository<Permission, Long> getEntityRepository() {
         return permissionRepository;
+    }
+
+    public boolean exists(String code) {
+        return false;
+    }
+
+    public Permission findByCode(String code) {
+        return permissionRepository.findOne(null);
     }
 }

@@ -1,0 +1,22 @@
+{
+    "name" : "sunlearning-webapp",
+    "version" : "0.0.1",
+    "dependencies" : {
+        "jquery" : "1.12.4",
+        "jquery-migrate" : "1.4.0",
+        "jquery-validation" : "1.15.0",
+        "jquery-form" : "3.51",
+        "jquery-ui" : "1.11.4",
+        "jsrender" : "0.9.76",
+        "z-tree.v3" : "3.5.23",
+        "underscore" : "1.8.3",
+        "backbone" : "1.3.3",
+        "bootstrap" : "3.3.6",
+        "bootstrap-table" : "1.10.1",
+        "bootstrap-switch" : "3.3.2",
+        "bootstrap-select" : "1.9.3",
+        "smalot-bootstrap-datetimepicker" : "2.3.8",
+        "font-awesome" : "4.6.3"
+    },
+    "devDependencies" : {}
+}

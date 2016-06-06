@@ -1,7 +1,6 @@
 package cn.elvea.controller;
 
-import cn.elvea.core.security.exception.IncorrectCaptchaException;
-import org.apache.shiro.SecurityUtils;
+import cn.elvea.security.exception.IncorrectCaptchaException;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -29,12 +28,6 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model) {
         model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
-        return "login";
-    }
-
-    @RequestMapping(value = "/logout")
-    public String logout(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String username, HttpServletRequest request, Model model) {
-        SecurityUtils.getSubject().logout();
         return "login";
     }
 

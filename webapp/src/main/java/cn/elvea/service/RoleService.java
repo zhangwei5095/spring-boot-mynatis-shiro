@@ -1,18 +1,21 @@
 package cn.elvea.service;
 
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
+import cn.elvea.core.service.BaseEntityService;
 import cn.elvea.domain.Role;
-import cn.elvea.repository.EntityRepository;
 import cn.elvea.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class RoleService extends EntityService<Role> {
+@Transactional
+public class RoleService extends BaseEntityService<Role, Long> {
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Override
-    public EntityRepository<Role> getRepository() {
+    protected BaseEntityRepository<Role, Long> getEntityRepository() {
         return roleRepository;
     }
 }

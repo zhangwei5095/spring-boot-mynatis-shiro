@@ -1,26 +1,26 @@
 package cn.elvea.domain;
 
+import cn.elvea.core.domain.BaseEntity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
-public class UserSession extends IdEntity {
-    private Long id;
+/**
+ * 用户会话实体类
+ */
+@Entity
+@Table(name = "userSession")
+public class UserSession extends BaseEntity {
     private String sessionId;
     private String username;
     private String host;
-    private Date lastAccessTime;
-    private Date startTime;
-    private Date endTime;
+    private Date lastAccessDatetime;
+    private Date startDatetime;
+    private Date endDatetime;
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @Column(nullable = false)
     public String getSessionId() {
         return sessionId;
     }
@@ -29,6 +29,7 @@ public class UserSession extends IdEntity {
         this.sessionId = sessionId;
     }
 
+    @Column(nullable = false)
     public String getUsername() {
         return username;
     }
@@ -37,6 +38,7 @@ public class UserSession extends IdEntity {
         this.username = username;
     }
 
+    @Column(nullable = false)
     public String getHost() {
         return host;
     }
@@ -45,27 +47,30 @@ public class UserSession extends IdEntity {
         this.host = host;
     }
 
-    public Date getLastAccessTime() {
-        return lastAccessTime;
+    @Column(nullable = false)
+    public Date getLastAccessDatetime() {
+        return lastAccessDatetime;
     }
 
-    public void setLastAccessTime(Date lastAccessTime) {
-        this.lastAccessTime = lastAccessTime;
+    public void setLastAccessDatetime(Date lastAccessDatetime) {
+        this.lastAccessDatetime = lastAccessDatetime;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    @Column(nullable = false)
+    public Date getStartDatetime() {
+        return startDatetime;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public void setStartDatetime(Date startDatetime) {
+        this.startDatetime = startDatetime;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    @Column(nullable = false)
+    public Date getEndDatetime() {
+        return endDatetime;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setEndDatetime(Date endDatetime) {
+        this.endDatetime = endDatetime;
     }
 }

@@ -1,9 +1,10 @@
 package cn.elvea.service;
 
+import cn.elvea.core.persistence.repository.BaseEntityRepository;
+import cn.elvea.core.service.BaseEntityService;
 import cn.elvea.domain.UserSession;
-import cn.elvea.repository.EntityRepository;
 import cn.elvea.repository.UserSessionRepository;
-import cn.elvea.core.security.CaptchaFormAuthenticationFilter;
+import cn.elvea.security.filter.CaptchaAuthFilter;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.SimpleSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ import java.util.Date;
 
 @Service
 @Transactional
-public class UserSessionService extends EntityService<UserSession> {
+public class UserSessionService extends BaseEntityService<UserSession, Long> {
     @Autowired
     UserSessionRepository userSessionRepository;
 
     @Override
-    public EntityRepository<UserSession> getRepository() {
+    public BaseEntityRepository<UserSession, Long> getEntityRepository() {
         return userSessionRepository;
     }
 
@@ -32,53 +33,53 @@ public class UserSessionService extends EntityService<UserSession> {
     public void createUserSession(Session session) {
         UserSession userSession = coverSessionToUserSession(session);
         if (userSession != null) {
-            if (session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key) != null) {
-                String username = (String) session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key);
+            if (session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key) != null) {
+                String username = (String) session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key);
                 userSession.setUsername(username);
             }
-            userSessionRepository.insert(userSession);
+            userSessionRepository.save(userSession);
         }
     }
 
     public void deleteUserSession(Session session) {
         UserSession userSession = userSessionRepository.findBySessionId(String.valueOf(session.getId()));
         if (userSession != null) {
-            if (session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key) != null) {
-                String username = (String) session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key);
+            if (session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key) != null) {
+                String username = (String) session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key);
                 userSession.setUsername(username);
             }
-            userSession.setEndTime(new Date());
-            userSessionRepository.update(userSession);
+            userSession.setEndDatetime(new Date());
+            userSessionRepository.save(userSession);
         }
     }
 
     public void updateUserSession(Session session) {
         UserSession userSession = userSessionRepository.findBySessionId(String.valueOf(session.getId()));
         if (userSession != null) {
-            if (session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key) != null) {
-                String username = (String) session.getAttribute(CaptchaFormAuthenticationFilter.Shiro_Session_Username_Key);
+            if (session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key) != null) {
+                String username = (String) session.getAttribute(CaptchaAuthFilter.Shiro_Session_Username_Key);
                 userSession.setUsername(username);
             }
-            userSession.setLastAccessTime(userSessionRepository.getDate());
-            userSessionRepository.update(userSession);
+            userSession.setLastAccessDatetime(new Date());
+            userSessionRepository.save(userSession);
         }
     }
 
     private UserSession coverSessionToUserSession(Session session) {
         UserSession userSession = new UserSession();
         userSession.setSessionId(String.valueOf(session.getId()));
-        userSession.setLastAccessTime(session.getLastAccessTime());
+        userSession.setLastAccessDatetime(session.getLastAccessTime());
         userSession.setHost(session.getHost());
-        userSession.setStartTime(session.getStartTimestamp());
+        userSession.setStartDatetime(session.getStartTimestamp());
         return userSession;
     }
 
     private Session coverUserSessionToSession(UserSession userSession) {
         SimpleSession session = new SimpleSession();
         session.setId(userSession.getId());
-        session.setLastAccessTime(userSession.getLastAccessTime());
+        session.setLastAccessTime(userSession.getLastAccessDatetime());
         session.setHost(userSession.getHost());
-        session.setStartTimestamp(userSession.getStartTime());
+        session.setStartTimestamp(userSession.getStartDatetime());
         return session;
     }
 }

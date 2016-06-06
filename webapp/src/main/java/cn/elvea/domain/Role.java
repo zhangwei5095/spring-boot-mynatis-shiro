@@ -1,31 +1,61 @@
 package cn.elvea.domain;
 
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import cn.elvea.core.domain.BaseEntity;
+import com.google.common.collect.Lists;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
-public class Role extends IdEntity {
-    private Long id;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
+
+/**
+ * 角色实体类
+ */
+@Entity
+@Table(name = "ROLES")
+public class Role extends BaseEntity {
+    public static final String CODE_PREFIX = "ROLE";
+    public static final String CODE_SYSADM = "SYSADM";
+    public static final String CODE_TADM = "TADM";
+    public static final String CODE_LRN = "LRN";
+    public static final String CODE_INSTR = "INSTR";
+
+    public static final int TYPE_TRAINER = 1;
+    public static final int TYPE_LEARNER = 2;
+    public static final int TYPE_TEACHER = 3;
+    public static final int TYPE_SUPER = 4;
+
     private String code;
-    private String title;
+    private int type;
+    private String labelname;
     private String description;
-    private Date createdAt;
-    private Long createdBy;
-    private Date updatedAt;
-    private Long updatedBy;
+    private int customind;
+    private String url;
+    private int active;
+    private int creator;
+    private Timestamp createdate;
+    private int modifiedby;
+    private Timestamp modifieddate;
+    private List<Permission> permissionlst = Lists.newArrayList();
+    private String permissionIdList;
+    private String name;
+    private int teacherInd;
+    private int superInd;
+    private int trainerInd;
+    private int learnerInd;
 
-    private Set<Permission> permissions = new LinkedHashSet<>();
-
-    @Override
-    public Long getId() {
-        return id;
+    public Role() {
     }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
+    public Role(String code, int customind, int active) {
+        super();
+        this.code = code;
+        this.customind = customind;
+        this.active = active;
     }
 
+    @Column(nullable = false)
     public String getCode() {
         return code;
     }
@@ -34,12 +64,20 @@ public class Role extends IdEntity {
         this.code = code;
     }
 
-    public String getTitle() {
-        return title;
+    public int getType() {
+        return type;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getLabelname() {
+        return labelname;
+    }
+
+    public void setLabelname(String labelname) {
+        this.labelname = labelname;
     }
 
     public String getDescription() {
@@ -50,43 +88,131 @@ public class Role extends IdEntity {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
-        return createdAt;
+    @Column(nullable = false)
+    public int getCustomind() {
+        return customind;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+    public void setCustomind(int customind) {
+        this.customind = customind;
     }
 
-    public Long getCreatedBy() {
-        return createdBy;
+    public String getUrl() {
+        return url;
     }
 
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    @Column(nullable = false)
+    public int getActive() {
+        return active;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setActive(int active) {
+        this.active = active;
     }
 
-    public Long getUpdatedBy() {
-        return updatedBy;
+    public int getCreator() {
+        return creator;
     }
 
-    public void setUpdatedBy(Long updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setCreator(int creator) {
+        this.creator = creator;
     }
 
-    public Set<Permission> getPermissions() {
-        return permissions;
+    public Timestamp getCreatedate() {
+        return createdate;
     }
 
-    public void setPermissions(Set<Permission> permissions) {
-        this.permissions = permissions;
+    public void setCreatedate(Timestamp createdate) {
+        this.createdate = createdate;
+    }
+
+    public int getModifiedby() {
+        return modifiedby;
+    }
+
+    public void setModifiedby(int modifiedby) {
+        this.modifiedby = modifiedby;
+    }
+
+    public Timestamp getModifieddate() {
+        return modifieddate;
+    }
+
+    public void setModifieddate(Timestamp modifieddate) {
+        this.modifieddate = modifieddate;
+    }
+
+    //多对多定义
+    @ManyToMany(fetch = FetchType.LAZY)
+    //中间表定义,表名采用默认命名规则
+    @JoinTable(name = "ROLEPERMISSIONS", joinColumns = {@JoinColumn(name = "roleid")}, inverseJoinColumns = {@JoinColumn(name = "permissionid")})
+    //Fecth策略定义
+    @Fetch(FetchMode.SUBSELECT)
+    //集合按id排序.
+    @OrderBy("id")
+    public List<Permission> getPermissionlst() {
+        return permissionlst;
+    }
+
+    public void setPermissionlst(List<Permission> permissionlst) {
+        this.permissionlst = permissionlst;
+    }
+
+    @Transient
+    public String getPermissionIdList() {
+        return permissionIdList;
+    }
+
+    public void setPermissionIdList(String permissionIdList) {
+        this.permissionIdList = permissionIdList;
+    }
+
+    @Transient
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Transient
+    public int getTeacherInd() {
+        return teacherInd;
+    }
+
+    public void setTeacherInd(int teacherInd) {
+        this.teacherInd = teacherInd;
+    }
+
+    @Transient
+    public int getSuperInd() {
+        return superInd;
+    }
+
+    public void setSuperInd(int superInd) {
+        this.superInd = superInd;
+    }
+
+    @Transient
+    public int getTrainerInd() {
+        return trainerInd;
+    }
+
+    public void setTrainerInd(int trainerInd) {
+        this.trainerInd = trainerInd;
+    }
+
+    @Transient
+    public int getLearnerInd() {
+        return learnerInd;
+    }
+
+    public void setLearnerInd(int learnerInd) {
+        this.learnerInd = learnerInd;
     }
 }

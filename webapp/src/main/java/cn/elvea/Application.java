@@ -1,28 +1,36 @@
 package cn.elvea;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, CacheAutoConfiguration.class})
-public class Application extends SpringBootServletInitializer {
-    public final static int DEFAULT_DATASOURCE_INIT_SIZE = 1;
-    public final static int DEFAULT_DATASOURCE_MAX_ACTIVE = 100;
-    public final static int DEFAULT_DATASOURCE_MIN_IDLE = 1;
-    public final static int DEFAULT_DATASOURCE_MAX_WAIT = 6000;
+@Component("application")
+public class Application {
+    // 应用是否启用调试模式
+    public static boolean DEBUG = false;
 
-    public final static String MASTER_DATASOURCE_PREFIX = "master";
-    public final static String SLAVE_DATASOURCE_PREFIX = "slave";
+    private static Environment env = null;
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
+    @Autowired
+    public Application(Environment env) {
+        Application.env = env;
+
+        DEBUG = getProperty("app.debug", Boolean.class, false);
     }
 
-    public static void main(final String[] args) {
-        SpringApplication.run(Application.class, args);
+    public static String getProperty(String key) {
+        return env.getProperty(key);
+    }
+
+    public static String getProperty(String key, String defaultValue) {
+        return env.getProperty(key, defaultValue);
+    }
+
+    public static <T> T getProperty(String key, Class<T> clazz) {
+        return env.getProperty(key, clazz);
+    }
+
+    public static <T> T getProperty(String key, Class<T> clazz, T defaultValue) {
+        return env.getProperty(key, clazz, defaultValue);
     }
 }
