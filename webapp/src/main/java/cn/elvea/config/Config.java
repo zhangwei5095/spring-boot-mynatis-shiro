@@ -92,7 +92,7 @@ public class Config implements TransactionManagementConfigurer {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.sunlearning.domain");
+        factory.setPackagesToScan("cn.elvea.domain");
         factory.setDataSource(dataSource());
         factory.setJpaProperties(properties);
         factory.setPersistenceUnitName(persistenceUnitName);
