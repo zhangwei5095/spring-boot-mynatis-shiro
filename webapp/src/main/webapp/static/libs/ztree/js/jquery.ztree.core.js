@@ -1,5 +1,5 @@
 /*
- * JQuery zTree core v3.5.23
+ * JQuery zTree core v3.5.24
  * http://zTree.me/
  *
  * Copyright (c) 2010 Hunter.z
@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  *
  * email: hunter.z@263.net
- * Date: 2016-04-01
+ * Date: 2016-06-06
  */
 (function($){
 	var settings = {}, roots = {}, caches = {},
@@ -598,7 +598,7 @@
 			var childKey = setting.data.key.children;
 			if (node[childKey]) {
 				for (var i=0, l=node[childKey].length; i<l; i++) {
-					arguments.callee(setting, node[childKey][i]);
+					data.removeNodeCache(setting, node[childKey][i]);
 				}
 			}
 			data.getCache(setting).nodes[data.getNodeCacheId(node.tId)] = null;
@@ -817,7 +817,7 @@
 			if (obj === null) return null;
 			var o = tools.isArray(obj) ? [] : {};
 			for(var i in obj){
-				o[i] = (obj[i] instanceof Date) ? new Date(obj[i].getTime()) : (typeof obj[i] === "object" ? arguments.callee(obj[i]) : obj[i]);
+				o[i] = (obj[i] instanceof Date) ? new Date(obj[i].getTime()) : (typeof obj[i] === "object" ? tools.clone(obj[i]) : obj[i]);
 			}
 			return o;
 		},
@@ -1118,13 +1118,14 @@
 		expandCollapseNode: function(setting, node, expandFlag, animateFlag, callback) {
 			var root = data.getRoot(setting),
 			childKey = setting.data.key.children;
+			var tmpCb, _callback;
 			if (!node) {
 				tools.apply(callback, []);
 				return;
 			}
 			if (root.expandTriggerFlag) {
-				var _callback = callback;
-				callback = function(){
+				_callback = callback;
+				tmpCb = function(){
 					if (_callback) _callback();
 					if (node.open) {
 						setting.treeObj.trigger(consts.event.EXPAND, [setting.treeId, node]);
@@ -1132,6 +1133,7 @@
 						setting.treeObj.trigger(consts.event.COLLAPSE, [setting.treeId, node]);
 					}
 				};
+				callback = tmpCb;
 				root.expandTriggerFlag = false;
 			}
 			if (!node.open && node.isParent && ((!$$(node, consts.id.UL, setting).get(0)) || (node[childKey] && node[childKey].length>0 && !$$(node[childKey][0], setting).get(0)))) {
@@ -1769,7 +1771,7 @@
 						addFlag = setting.view.selectedMulti && addFlag;
 						if (node.parentTId) {
 							view.expandCollapseParentNode(setting, node.getParentNode(), true, false, showNodeFocus);
-						} else {
+						} else if (!isSilent) {
 							try{$$(node, setting).focus().blur();}catch(e){}
 						}
 						view.selectNode(setting, node, addFlag);
