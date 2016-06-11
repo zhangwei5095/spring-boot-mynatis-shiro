@@ -1,14 +1,10 @@
 package cn.elvea.domain;
 
 import cn.elvea.core.domain.BaseEntity;
-import com.google.common.collect.Lists;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * 组织架构实体类
@@ -16,40 +12,34 @@ import java.util.List;
 @Entity
 @Table(name = "ORGUNIT")
 public class Organization extends BaseEntity {
+    private Long id;
+    private Long parentId;
     private String code;
-    private String name;
-    private String fullname;
+    private String title;
     private String description;
-    private int synind;
-    private int active;
-    private int wxorgid;
-    private Timestamp lstupdated;
-    private List<User> supervisorlst = Lists.newArrayList();
-    private String supervisoridlst;
-    private String supervisornamelst;
-    private List<User> headlst = Lists.newArrayList();
-    private String headidlst;
-    private String headnamelst;
+    private Timestamp createdAt;
+    private Long createdBy;
+    private Timestamp updatedAt;
+    private Long updatedBy;
 
-    public Organization() {
+    @Override
+    public Long getId() {
+        return id;
     }
 
-    public Organization(Long id) {
+    @Override
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Organization(String code, String name, String fullname, String description,
-                        int synind, int active, Timestamp lstupdated) {
-        this.code = code;
-        this.name = name;
-        this.fullname = fullname;
-        this.description = description;
-        this.synind = synind;
-        this.active = active;
-        this.lstupdated = lstupdated;
+    public Long getParentId() {
+        return parentId;
     }
 
-    @Column(nullable = false, unique = true)
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
     public String getCode() {
         return code;
     }
@@ -58,118 +48,51 @@ public class Organization extends BaseEntity {
         this.code = code;
     }
 
-    @Column(nullable = false)
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(nullable = false)
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
-        return description;//DESCRIPTION description
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Column(nullable = false)
-    public int getSynind() {
-        return synind;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setSynind(int synind) {
-        this.synind = synind;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 
-    @Column(nullable = false)
-    public int getActive() {
-        return active;
+    public Long getCreatedBy() {
+        return createdBy;
     }
 
-    public void setActive(int active) {
-        this.active = active;
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
     }
 
-    @Column(nullable = false)
-    public Timestamp getLstupdated() {
-        return lstupdated;
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setLstupdated(Timestamp lstupdated) {
-        this.lstupdated = lstupdated;
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
-    @Transient
-    public List<User> getSupervisorlst() {
-        return supervisorlst;
+    public Long getUpdatedBy() {
+        return updatedBy;
     }
 
-    public void setSupervisorlst(List<User> supervisorlst) {
-        this.supervisorlst = supervisorlst;
-    }
-
-    @Transient
-    public String getSupervisoridlst() {
-        return this.supervisoridlst;
-    }
-
-    public void setSupervisoridlst(String supervisoridlst) {
-        this.supervisoridlst = supervisoridlst;
-    }
-
-    @Transient
-    public String getSupervisornamelst() {
-        return this.supervisornamelst;
-    }
-
-    public void setSupervisornamelst(String supervisornamelst) {
-        this.supervisornamelst = supervisornamelst;
-    }
-
-    @Transient
-    public List<User> getHeadlst() {
-        return headlst;
-    }
-
-    public void setHeadlst(List<User> headlst) {
-        this.headlst = headlst;
-    }
-
-    @Transient
-    public String getHeadidlst() {
-        return headidlst;
-    }
-
-    public void setHeadidlst(String headidlst) {
-        this.headidlst = headidlst;
-    }
-
-    @Transient
-    public String getHeadnamelst() {
-        return headnamelst;
-    }
-
-    public void setHeadnamelst(String headnamelst) {
-        this.headnamelst = headnamelst;
-    }
-
-    public int getWxorgid() {
-        return wxorgid;
-    }
-
-    public void setWxorgid(int wxorgid) {
-        this.wxorgid = wxorgid;
+    public void setUpdatedBy(Long updatedBy) {
+        this.updatedBy = updatedBy;
     }
 }

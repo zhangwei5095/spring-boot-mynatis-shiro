@@ -2,16 +2,9 @@ package cn.elvea.domain;
 
 import cn.elvea.core.domain.BaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.sql.Timestamp;
 
-/**
- * 职级实体类
- */
-@Entity
-@Table(name = "POSITION")
-public class Position extends BaseEntity {
+public class UserGroup extends BaseEntity {
     private Long id;
     private Long parentId;
     private String code;
