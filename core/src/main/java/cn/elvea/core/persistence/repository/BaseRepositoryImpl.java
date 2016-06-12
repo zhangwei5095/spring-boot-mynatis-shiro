@@ -1,13 +1,15 @@
 package cn.elvea.core.persistence.repository;
 
-import cn.elvea.core.persistence.repository.support.NativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningWork;
-import cn.elvea.core.persistence.repository.support.Work;
+import cn.elvea.core.persistence.repository.support.Callback;
+import cn.elvea.core.persistence.repository.support.NativeCallback;
+import cn.elvea.core.persistence.repository.support.ReturningCallback;
+import cn.elvea.core.persistence.repository.support.ReturningNativeCallback;
 import cn.elvea.core.utils.JdbcUtils;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
+import org.hibernate.jdbc.ReturningWork;
+import org.hibernate.jdbc.Work;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -44,35 +46,35 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
     }
 
     @Override
-    public void execute(Work action) throws DataAccessException {
-        action.execute(entityManager);
+    public void execute(Callback callback) throws DataAccessException {
+        callback.execute(entityManager);
     }
 
     @Override
-    public <E> E execute(ReturningWork<E> action) throws DataAccessException {
-        return action.execute(entityManager);
+    public <E> E execute(ReturningCallback<E> callback) throws DataAccessException {
+        return callback.execute(entityManager);
     }
 
     @Override
-    public void execute(final NativeWork action) throws DataAccessException {
+    public void execute(final NativeCallback callback) throws DataAccessException {
         Session session = entityManager.unwrap(Session.class);
 
-        session.doWork(new org.hibernate.jdbc.Work() {
+        session.doWork(new Work() {
             @Override
             public void execute(Connection connection) throws SQLException {
-                action.execute(connection);
+                callback.execute(connection);
             }
         });
     }
 
     @Override
-    public <E> E execute(final ReturningNativeWork<E> action) throws DataAccessException {
+    public <E> E execute(final ReturningNativeCallback<E> callback) throws DataAccessException {
         Session session = entityManager.unwrap(Session.class);
 
-        return session.doReturningWork(new org.hibernate.jdbc.ReturningWork<E>() {
+        return session.doReturningWork(new ReturningWork<E>() {
             @Override
             public E execute(Connection connection) throws SQLException {
-                return action.execute(connection);
+                return callback.execute(connection);
             }
         });
     }
@@ -206,7 +208,7 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
 
     @Override
     public DatabaseMetaData getDatabaseMetaData() throws SQLException {
-        return execute(new ReturningNativeWork<DatabaseMetaData>() {
+        return execute(new ReturningNativeCallback<DatabaseMetaData>() {
             @Override
             public DatabaseMetaData execute(Connection con) throws SQLException, DataAccessException {
                 return JdbcUtils.getDatabaseMetaData(con);
@@ -216,7 +218,7 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
 
     @Override
     public String getDatabaseType() throws SQLException {
-        return execute(new ReturningNativeWork<String>() {
+        return execute(new ReturningNativeCallback<String>() {
             @Override
             public String execute(Connection con) throws SQLException, DataAccessException {
                 return JdbcUtils.getDatabaseType(JdbcUtils.getDatabaseMetaData(con));
@@ -226,7 +228,7 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
 
     @Override
     public String createTempTable(final List<Long> data) throws SQLException {
-        return execute(new ReturningNativeWork<String>() {
+        return execute(new ReturningNativeCallback<String>() {
             @Override
             public String execute(Connection con) throws SQLException, DataAccessException {
                 return JdbcUtils.createTemporaryTable(con, data);
@@ -236,7 +238,7 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
 
     @Override
     public String createTempTable(final Map<String, String> nameTypeMap, final List<Map<String, Object>> data) throws SQLException {
-        return execute(new ReturningNativeWork<String>() {
+        return execute(new ReturningNativeCallback<String>() {
             @Override
             public String execute(Connection con) throws SQLException, DataAccessException {
                 return JdbcUtils.createTemporaryTable(con, nameTypeMap, data);
@@ -246,7 +248,7 @@ public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRep
 
     @Override
     public void dropTemporaryTable(final String temporaryTableName) throws SQLException {
-        execute(new NativeWork() {
+        execute(new NativeCallback() {
             @Override
             public void execute(Connection con) throws SQLException, DataAccessException {
                 JdbcUtils.dropTemporaryTable(con, temporaryTableName);

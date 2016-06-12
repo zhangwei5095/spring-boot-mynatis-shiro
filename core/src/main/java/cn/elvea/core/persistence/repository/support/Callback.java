@@ -4,6 +4,6 @@ import org.springframework.dao.DataAccessException;
 
 import javax.persistence.EntityManager;
 
-public interface ReturningWork<T> {
-    T execute(EntityManager entityManager) throws DataAccessException;
+public interface Callback {
+    void execute(EntityManager entityManager) throws DataAccessException;
 }

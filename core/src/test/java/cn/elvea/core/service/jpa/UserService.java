@@ -3,10 +3,10 @@ package cn.elvea.core.service.jpa;
 import cn.elvea.core.domain.User;
 import cn.elvea.core.persistence.repository.BaseEntityRepository;
 import cn.elvea.core.persistence.repository.UserRepository;
-import cn.elvea.core.persistence.repository.support.NativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningWork;
-import cn.elvea.core.persistence.repository.support.Work;
+import cn.elvea.core.persistence.repository.support.NativeCallback;
+import cn.elvea.core.persistence.repository.support.ReturningNativeCallback;
+import cn.elvea.core.persistence.repository.support.ReturningCallback;
+import cn.elvea.core.persistence.repository.support.Callback;
 import cn.elvea.core.utils.JdbcUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -34,7 +34,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
     }
 
     public long testWork() throws SQLException {
-        userRepository.execute(new Work() {
+        userRepository.execute(new Callback() {
             @Override
             public void execute(EntityManager entityManager) throws DataAccessException {
                 User user = new User();
@@ -44,7 +44,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
             }
         });
 
-        return userRepository.execute(new ReturningWork<Long>() {
+        return userRepository.execute(new ReturningCallback<Long>() {
             @Override
             public Long execute(EntityManager entityManager) throws DataAccessException {
                 Query query = entityManager.createQuery("select count(id) from User ");
@@ -54,7 +54,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
     }
 
     public int testNativeWork() throws SQLException {
-        userRepository.execute(new NativeWork() {
+        userRepository.execute(new NativeCallback() {
             @Override
             public void execute(Connection con) throws SQLException, DataAccessException {
                 PreparedStatement stmt = null;
@@ -68,7 +68,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
             }
         });
 
-        return userRepository.execute(new ReturningNativeWork<Integer>() {
+        return userRepository.execute(new ReturningNativeCallback<Integer>() {
             @Override
             public Integer execute(Connection con) throws SQLException, DataAccessException {
                 ResultSet rs = null;
@@ -99,7 +99,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
             tmpTableName = userRepository.createTempTable(data);
 
             final String temporaryTableName = tmpTableName;
-            return userRepository.execute(new ReturningNativeWork<Integer>() {
+            return userRepository.execute(new ReturningNativeCallback<Integer>() {
                 @Override
                 public Integer execute(Connection con) throws SQLException, DataAccessException {
                     ResultSet rs = null;
@@ -150,7 +150,7 @@ public class UserService extends BaseJpaEntityService<User, Long> {
 
             final String temporaryTableName = tmpTableName;
 
-            return userRepository.execute(new ReturningNativeWork<Integer>() {
+            return userRepository.execute(new ReturningNativeCallback<Integer>() {
                 @Override
                 public Integer execute(Connection con) throws SQLException, DataAccessException {
                     int cnt = 0;

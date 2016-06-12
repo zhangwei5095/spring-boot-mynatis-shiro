@@ -1,9 +1,9 @@
 package cn.elvea.core.persistence.repository;
 
-import cn.elvea.core.persistence.repository.support.NativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
-import cn.elvea.core.persistence.repository.support.ReturningWork;
-import cn.elvea.core.persistence.repository.support.Work;
+import cn.elvea.core.persistence.repository.support.Callback;
+import cn.elvea.core.persistence.repository.support.NativeCallback;
+import cn.elvea.core.persistence.repository.support.ReturningCallback;
+import cn.elvea.core.persistence.repository.support.ReturningNativeCallback;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,34 +27,34 @@ public interface BaseRepository<T, PK extends Serializable> extends JpaRepositor
     /**
      * 执行当前会话的原生JPA操作
      *
-     * @param work 需要执行的操作
+     * @param callback 需要执行的操作
      * @throws DataAccessException
      */
-    void execute(final Work work) throws DataAccessException;
+    void execute(final Callback callback) throws DataAccessException;
 
     /**
      * 执行当前会话的原生JPA操作,带返回值
      *
-     * @param work 需要执行的操作
+     * @param callback 需要执行的操作
      * @throws DataAccessException
      */
-    <E> E execute(final ReturningWork<E> work) throws DataAccessException;
+    <E> E execute(final ReturningCallback<E> callback) throws DataAccessException;
 
     /**
      * 执行当前会话的原生JDBC操作
      *
-     * @param work 需要执行的操作
+     * @param callback 需要执行的操作
      * @throws DataAccessException
      */
-    void execute(final NativeWork work) throws SQLException, DataAccessException;
+    void execute(final NativeCallback callback) throws SQLException, DataAccessException;
 
     /**
      * 执行当前会话的原生JDBC操作,带返回值
      *
-     * @param work 需要执行的操作
+     * @param callback 需要执行的操作
      * @throws DataAccessException
      */
-    <E> E execute(final ReturningNativeWork<E> work) throws SQLException, DataAccessException;
+    <E> E execute(final ReturningNativeCallback<E> callback) throws SQLException, DataAccessException;
 
     /**
      * 执行JPQL
