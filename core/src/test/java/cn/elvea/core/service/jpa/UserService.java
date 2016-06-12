@@ -1,4 +1,4 @@
-package cn.elvea.core.persistence.service;
+package cn.elvea.core.service.jpa;
 
 import cn.elvea.core.domain.User;
 import cn.elvea.core.persistence.repository.BaseEntityRepository;
@@ -7,7 +7,6 @@ import cn.elvea.core.persistence.repository.support.NativeWork;
 import cn.elvea.core.persistence.repository.support.ReturningNativeWork;
 import cn.elvea.core.persistence.repository.support.ReturningWork;
 import cn.elvea.core.persistence.repository.support.Work;
-import cn.elvea.core.service.BaseEntityService;
 import cn.elvea.core.utils.JdbcUtils;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class UserService extends BaseEntityService<User, Long> {
+public class UserService extends BaseJpaEntityService<User, Long> {
     @Autowired
     UserRepository userRepository;
 

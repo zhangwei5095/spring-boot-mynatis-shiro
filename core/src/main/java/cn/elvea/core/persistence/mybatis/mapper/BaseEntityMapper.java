@@ -11,9 +11,11 @@ public interface BaseEntityMapper<T, PK extends Serializable> extends BaseMapper
 
     void update(T entity);
 
+    void save(T entity);
+
     void delete(@Param("id") PK id);
 
-    T get(@Param("id") PK id);
+    T getOne(@Param("id") PK id);
 
     List<T> findByPage(Pageable pageable);
 }

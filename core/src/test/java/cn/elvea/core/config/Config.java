@@ -30,10 +30,9 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan(basePackages = {"com.sunlearning"})
+@ComponentScan(basePackages = {"cn.elvea"})
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories(basePackages = "com.sunlearning.core.persistence.repository", repositoryBaseClass = BaseRepositoryImpl.class)
-
+@EnableJpaRepositories(basePackages = "cn.elvea.core.persistence.repository", repositoryBaseClass = BaseRepositoryImpl.class)
 public class Config implements TransactionManagementConfigurer {
     @Autowired
     Environment env;
@@ -81,7 +80,7 @@ public class Config implements TransactionManagementConfigurer {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.sunlearning.core.domain");
+        factory.setPackagesToScan("cn.elvea.core.domain");
         factory.setDataSource(dataSource());
         factory.setJpaProperties(properties);
         factory.setPersistenceUnitName(persistenceUnitName);

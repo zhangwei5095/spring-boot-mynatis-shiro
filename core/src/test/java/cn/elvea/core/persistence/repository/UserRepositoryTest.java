@@ -17,16 +17,16 @@ public class UserRepositoryTest extends BaseTest {
     @Test
     public void testCrud() {
         User user = new User();
-        user.setUsername("com.sunlearning.test");
+        user.setUsername("test");
         userRepository.save(user);
 
-        user = userRepository.findByUsername("com.sunlearning.test");
+        user = userRepository.findByUsername("test");
         Assert.assertNotNull(user);
         Assert.assertNotNull(user.getId());
 
         userRepository.delete(user.getId());
 
-        user = userRepository.findByUsername("com.sunlearning.test");
+        user = userRepository.findByUsername("test");
         Assert.assertNull(user);
     }
 }

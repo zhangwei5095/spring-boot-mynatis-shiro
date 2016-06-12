@@ -1,4 +1,4 @@
-package cn.elvea.core.persistence.service;
+package cn.elvea.core.service.jpa;
 
 import cn.elvea.core.test.BaseTest;
 import org.junit.Assert;

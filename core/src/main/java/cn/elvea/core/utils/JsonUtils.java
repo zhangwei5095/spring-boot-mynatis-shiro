@@ -11,6 +11,7 @@ import java.util.Map;
 /**
  * Json相关的工具类
  */
+@SuppressWarnings({"unchecked"})
 public class JsonUtils {
     private final static ObjectMapper objectMapper = new ObjectMapper();
 
