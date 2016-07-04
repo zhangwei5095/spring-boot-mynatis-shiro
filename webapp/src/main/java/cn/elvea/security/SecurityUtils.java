@@ -1,7 +1,7 @@
 package cn.elvea.security;
 
-import cn.elvea.core.utils.Digests;
-import cn.elvea.core.utils.Encodes;
+import cn.elvea.commons.utils.Digests;
+import cn.elvea.commons.utils.Encodes;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 

@@ -1,6 +1,6 @@
 package cn.elvea.repository;
 
-import cn.elvea.core.persistence.repository.BaseEntityRepository;
+import cn.elvea.commons.persistence.repository.BaseEntityRepository;
 import cn.elvea.domain.UserPreferences;
 import org.springframework.stereotype.Repository;
 

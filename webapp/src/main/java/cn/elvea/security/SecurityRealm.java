@@ -1,6 +1,6 @@
 package cn.elvea.security;
 
-import cn.elvea.core.utils.Encodes;
+import cn.elvea.commons.utils.Encodes;
 import cn.elvea.domain.Role;
 import cn.elvea.domain.User;
 import cn.elvea.service.UserService;

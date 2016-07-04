@@ -1,7 +1,7 @@
 package cn.elvea.config;
 
-import cn.elvea.core.cache.CustomCacheErronrHandler;
-import cn.elvea.core.cache.CustomCacheResolver;
+import cn.elvea.commons.cache.CustomCacheErronrHandler;
+import cn.elvea.commons.cache.CustomCacheResolver;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.cache.annotation.EnableCaching;

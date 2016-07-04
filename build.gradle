@@ -90,8 +90,8 @@ allprojects {
     defaultTasks = ['clean', 'build']
 }
 
-project("core") {
-    description = "Platform Core"
+project("commons") {
+    description = "Platform Commons Module"
     version = "0.0.1"
 
     dependencies {
@@ -151,7 +151,7 @@ project("webapp") {
     }
 
     dependencies {
-        compile(project(":core"))
+        compile(project(":commons"))
 
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-log4j2")

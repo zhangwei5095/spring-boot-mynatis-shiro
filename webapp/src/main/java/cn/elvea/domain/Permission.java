@@ -1,6 +1,6 @@
 package cn.elvea.domain;
 
-import cn.elvea.core.domain.BaseEntity;
+import cn.elvea.commons.domain.BaseEntity;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 

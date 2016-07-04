@@ -1,7 +1,7 @@
 package cn.elvea.service;
 
-import cn.elvea.core.persistence.repository.BaseEntityRepository;
-import cn.elvea.core.service.BaseEntityService;
+import cn.elvea.commons.persistence.repository.BaseEntityRepository;
+import cn.elvea.commons.service.BaseEntityService;
 import cn.elvea.domain.Permission;
 import cn.elvea.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

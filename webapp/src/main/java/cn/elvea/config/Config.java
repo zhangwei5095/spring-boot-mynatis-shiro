@@ -1,8 +1,8 @@
 package cn.elvea.config;
 
 import cn.elvea.ApplicationInitializer;
-import cn.elvea.core.persistence.datasource.DynamicDataSource;
-import cn.elvea.core.persistence.repository.BaseRepositoryImpl;
+import cn.elvea.commons.persistence.datasource.DynamicDataSource;
+import cn.elvea.commons.persistence.repository.BaseRepositoryImpl;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;

@@ -1,6 +1,6 @@
 package cn.elvea.security;
 
-import cn.elvea.core.utils.Encodes;
+import cn.elvea.commons.utils.Encodes;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;

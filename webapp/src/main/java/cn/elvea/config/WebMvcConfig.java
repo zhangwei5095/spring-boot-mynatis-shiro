@@ -1,7 +1,7 @@
 package cn.elvea.config;
 
-import cn.elvea.core.web.mvc.WebArgumentResolver;
-import cn.elvea.core.web.servlet.CaptchaServlet;
+import cn.elvea.commons.web.mvc.WebArgumentResolver;
+import cn.elvea.commons.web.servlet.CaptchaServlet;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
