@@ -39,7 +39,7 @@ public class SecurityRealm extends AuthorizingRealm {
         if (user != null) {
             info = new SimpleAuthorizationInfo();
 
-            for (Role role : user.getRolelst()) {
+            for (Role role : user.getRoles()) {
                 // 用户拥有角色
                 info.addRole(role.getCode());
 
@@ -64,7 +64,7 @@ public class SecurityRealm extends AuthorizingRealm {
 
             SecurityUser securityUser = new SecurityUser();
             securityUser.setName(user.getNickname());
-            securityUser.setUsername(user.getEmployeeNumber());
+            securityUser.setUsername(user.getUsername());
             return new SimpleAuthenticationInfo(securityUser, user.getPassword(), ByteSource.Util.bytes(salt), getName());
         }
         return null;

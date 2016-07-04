@@ -1,7 +1,7 @@
 package cn.elvea.service;
 
 import cn.elvea.commons.persistence.repository.BaseEntityRepository;
-import cn.elvea.commons.service.BaseEntityService;
+import cn.elvea.commons.service.jpa.BaseJpaEntityService;
 import cn.elvea.domain.User;
 import cn.elvea.repository.UserRepository;
 import cn.elvea.security.SecurityUtils;
@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
 
 @Service
 @Transactional
-public class UserService extends BaseEntityService<User, Long> {
+public class UserService extends BaseJpaEntityService<User, Long> {
     @Autowired
     private UserRepository userRepository;
 
@@ -34,6 +34,6 @@ public class UserService extends BaseEntityService<User, Long> {
 
     public String encryptPassword(User user) {
         Assert.notNull(user, "User can not be null.");
-        return encryptPassword(user.getEmployeeNumber(), user.getAgentEmployeeNumber());
+        return encryptPassword("", "");
     }
 }

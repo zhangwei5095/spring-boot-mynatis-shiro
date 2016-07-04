@@ -1,7 +1,7 @@
 package cn.elvea.service;
 
 import cn.elvea.commons.persistence.repository.BaseEntityRepository;
-import cn.elvea.commons.service.BaseEntityService;
+import cn.elvea.commons.service.jpa.BaseJpaEntityService;
 import cn.elvea.domain.Permission;
 import cn.elvea.repository.PermissionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PermissionService extends BaseEntityService<Permission, Long> {
+public class PermissionService extends BaseJpaEntityService<Permission, Long> {
     @Autowired
     private PermissionRepository permissionRepository;
 
@@ -24,6 +24,6 @@ public class PermissionService extends BaseEntityService<Permission, Long> {
     }
 
     public Permission findByCode(String code) {
-        return permissionRepository.findOne(null);
+        return permissionRepository.findOne(1l);
     }
 }

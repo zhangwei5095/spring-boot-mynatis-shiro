@@ -1,6 +1,6 @@
 package cn.elvea.config;
 
-import cn.elvea.ApplicationInitializer;
+import cn.elvea.Application;
 import cn.elvea.commons.persistence.datasource.DynamicDataSource;
 import cn.elvea.commons.persistence.repository.BaseRepositoryImpl;
 import com.alibaba.druid.filter.Filter;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -57,7 +58,7 @@ public class Config implements TransactionManagementConfigurer {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages/messages");
-        messageSource.setDefaultEncoding(ApplicationInitializer.ENCODING);
+        messageSource.setDefaultEncoding(Application.ENCODING);
         return messageSource;
     }
 
@@ -109,6 +110,7 @@ public class Config implements TransactionManagementConfigurer {
 
     // 数据源配置
     @Bean
+    @Primary
     public DataSource dataSource() {
         boolean useMasterSlave = env.getProperty("datasource.master-slave.enable", Boolean.class, false);
 

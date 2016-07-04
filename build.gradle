@@ -85,6 +85,10 @@ allprojects {
         compile.exclude module: 'commons-logging'
         compile.exclude module: 'xml-apis'
         compile.exclude module: 'h2'
+        compile.exclude module: 'spring-boot-starter-logging'
+        compile.exclude module: 'spring-boot-starter-tomcat'
+        compile.exclude module: 'hibernate-entitymanager'
+        compile.exclude module: 'ehcache-core'
     }
 
     defaultTasks = ['clean', 'build']
@@ -130,12 +134,64 @@ project("commons") {
     }
 }
 
+project("core") {
+    description = "Platform Core Module"
+    version = "0.0.1"
+
+    dependencies {
+        compile(project(":commons"))
+
+        compile("org.springframework.boot:spring-boot-starter-web")
+        compile("org.springframework.boot:spring-boot-starter-log4j2")
+        compile("org.springframework.boot:spring-boot-starter-redis")
+        compile("org.springframework.boot:spring-boot-starter-aop")
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile("org.springframework.session:spring-session")
+
+        // commons
+        compile("org.apache.commons:commons-lang3:${commonsLangVersion}")
+        compile("commons-fileupload:commons-fileupload:${commonsFileuploadVersion}")
+        compile("commons-io:commons-io:${commonsIoVersion}")
+        compile("commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}")
+        compile("commons-codec:commons-codec:${commonsCodecVersion}")
+
+        // 3rd party
+        compile("com.fasterxml.jackson.core:jackson-core")
+        compile("com.fasterxml.jackson.core:jackson-annotations")
+        compile("com.fasterxml.jackson.core:jackson-databind")
+        compile("net.sf.ehcache:ehcache")
+        compile("joda-time:joda-time")
+        compile("net.sf.ehcache:ehcache")
+        compile("joda-time:joda-time")
+        compile("com.alibaba:druid:${druidVersion}")
+        compile("org.sitemesh:sitemesh:${sitemeshVersion}")
+        compile("com.google.guava:guava:${guavaVersion}")
+        compile("mysql:mysql-connector-java")
+        compile("redis.clients:jedis")
+        compile("org.apache.shiro:shiro-spring:${shiroVersion}")
+        compile("org.apache.shiro:shiro-web:${shiroVersion}")
+        compile("org.apache.shiro:shiro-ehcache:${shiroVersion}")
+        compile("org.hibernate:hibernate-core")
+
+        // javax
+        compileOnly("javax.servlet:jstl:${javaxJstlApiVersion}")
+        compileOnly("javax.servlet:javax.servlet-api:${javaxServletApiVersion}")
+        compileOnly("javax.servlet.jsp:javax.servlet.jsp-api:${javaxJspApiVersion}")
+
+        // test
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+}
+
 project("webapp") {
     description = "Platform Webapp"
     version = "0.0.1"
 
     apply plugin: 'spring-boot'
     apply plugin: "war"
+    apply plugin: 'application'
+
+    mainClassName = "cn.elvea.ApplicationInitializer"
 
     springBoot {
         applyExcludeRules = false
@@ -143,15 +199,10 @@ project("webapp") {
 
     configurations {
         providedRuntime
-
-        compile.exclude module: 'spring-boot-starter-logging'
-        compile.exclude module: 'spring-boot-starter-tomcat'
-        compile.exclude module: 'hibernate-entitymanager'
-        compile.exclude module: 'ehcache-core'
     }
 
     dependencies {
-        compile(project(":commons"))
+        compile(project(":core"))
 
         compile("org.springframework.boot:spring-boot-starter-web")
         compile("org.springframework.boot:spring-boot-starter-log4j2")
@@ -198,4 +249,3 @@ project("webapp") {
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
 }
-

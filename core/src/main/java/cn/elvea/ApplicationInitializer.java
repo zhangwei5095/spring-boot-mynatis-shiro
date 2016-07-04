@@ -2,6 +2,7 @@ package cn.elvea;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
@@ -21,14 +22,14 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationInitializer extends SpringBootServletInitializer {
     private final static Logger logger = LoggerFactory.getLogger(ApplicationInitializer.class);
 
-    public final static String ENCODING = "UTF-8";
-
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(ApplicationInitializer.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationInitializer.class, args);
+        SpringApplication springApplication = new SpringApplication();
+        springApplication.setBannerMode(Banner.Mode.OFF);
+        springApplication.run(ApplicationInitializer.class, args);
     }
 }

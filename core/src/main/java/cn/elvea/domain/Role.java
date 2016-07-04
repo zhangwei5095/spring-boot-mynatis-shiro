@@ -12,7 +12,6 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "ROLES")
 public class Role extends BaseEntity {
-    private Long id;
     private Long parentId;
     private String code;
     private String title;
@@ -21,16 +20,6 @@ public class Role extends BaseEntity {
     private Long createdBy;
     private Timestamp updatedAt;
     private Long updatedBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getParentId() {
         return parentId;

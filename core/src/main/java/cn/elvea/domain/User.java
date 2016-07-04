@@ -1,10 +1,14 @@
 package cn.elvea.domain;
 
 import cn.elvea.commons.domain.BaseEntity;
+import com.google.common.collect.Lists;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 用户实体类
@@ -24,7 +28,10 @@ public class User extends BaseEntity {
     public static final String STATUS_DELETED = "DELETED";
     public static final String STATUS_OK = "OK";
 
+    @Column
     private String username;
+
+    @Column
     private String email;
     private String mobile;
     private String password;
@@ -40,6 +47,9 @@ public class User extends BaseEntity {
     private int createdBy;
     private Timestamp updatedAt;
     private int updatedBy;
+
+    @Transient
+    private List<Role> roles = Lists.newArrayList();
 
     public User() {
     }
@@ -170,5 +180,13 @@ public class User extends BaseEntity {
 
     public void setUpdatedBy(int updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
