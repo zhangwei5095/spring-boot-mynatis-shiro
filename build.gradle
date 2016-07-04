@@ -1,4 +1,9 @@
 buildscript {
+    ext {
+        springBootVersion = '1.3.5.RELEASE'
+        springDependencyManagementPluginVersion = '0.6.0.RELEASE'
+    }
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -6,8 +11,8 @@ buildscript {
     }
 
     dependencies {
-        classpath("io.spring.gradle:dependency-management-plugin:0.5.7.RELEASE")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.5.RELEASE")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyManagementPluginVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
@@ -20,74 +25,84 @@ allprojects {
         jcenter()
     }
 
+    //
     ext {
-        tomcatVersion = "8.0.35"
+        assertjVersion = '3.4.1'
+        mockitoVersion = '1.10.19'
 
-        assertjVersion = "3.4.1"
-        mockitoVersion = "1.10.19"
+        springVersion = '4.3.0.RELEASE'
+        springBootVersion = '1.3.5.RELEASE'
+        springDataVersion = 'Hopper-SR2'
+        springSecurityVersion = '4.1.0.RELEASE'
+        springSessionVersion = '1.2.1.RELEASE'
 
-        springVersion = "4.3.0.RELEASE"
-        springBootVersion = "1.3.5.RELEASE"
-        springDataVersion = "Hopper-SR1"
-        springSecurityVersion = "4.1.0.RELEASE"
-        springSessionVersion = "1.2.0.RELEASE"
+        sitemeshVersion = '3.0.1'
+        guavaVersion = '19.0'
+        jodatimeVersion = '2.9.4'
+        ehcacheVersion = '2.10.2.2.21'
+        mysqlVersion = '5.1.39'
+        jedisVersion = '2.8.1'
+        shiroVersion = '1.2.4'
+        druidVersion = '1.0.21'
+        jacksonVersion = '2.7.5'
+        mybatisVersion = '3.4.1'
+        mybatisSpringVersion = '1.3.0'
+        mybatisSpringBootVersion = '1.1.1'
+        okHttpVersion = '3.3.1'
+        log4j2Version = '2.6.1'
+        ehcacheVersion = '2.10.2.2.21'
+        slf4jVersion = '1.7.21'
+        javassistVersion = '3.20.0-GA'
+        hibernateVersion = '5.2.1.Final'
+        hibernateValidatorVersion = '5.2.4.Final'
 
-        sitemeshVersion = "3.0.1"
-        guavaVersion = "19.0"
-        jodatimeVersion = "2.9.4"
-        ehcacheVersion = "2.10.2"
-        mysqlVersion = "5.1.39"
-        jedisVersion = "2.8.1"
-        shiroVersion = "1.2.5"
-        druidVersion = "1.0.20"
-        mybatisVersion = "3.4.0"
-        mybatisSpringVersion = "1.3.0"
-        mybatisSpringBootVersion = "1.1.1"
-        okHttpVersion = "3.3.1"
+        javaxJtaVersion = '1.2'
+        javaxJstlApiVersion = '1.2'
+        javaxServletApiVersion = '3.1.0'
+        javaxJspApiVersion = '2.3.0'
 
-        javaxJtaVersion = "1.2"
-        javaxJstlApiVersion = "1.2"
-        javaxServletApiVersion = "3.1.0"
-        javaxJspApiVersion = "2.3.0"
+        commonsIoVersion = '2.4'
+        commonsLangVersion = '3.4'
+        commonsCodecVersion = '1.9'
+        commonsFileuploadVersion = '1.3.2'
+        commonsBeanutilsVersion = '1.9.2'
+        commonsCollectionsVersion = '3.2.1'
 
-        commonsIoVersion = "2.4"
-        commonsLangVersion = "3.4"
-        commonsCodecVersion = "1.9"
-        commonsFileuploadVersion = "1.3.2"
-        commonsBeanutilsVersion = "1.9.2"
-        commonsCollectionsVersion = "3.2.1"
+        tomcatVersion = '8.0.36'
     }
+
+    // 替换Spring Boot默认的版本
+    ext['spring.version'] = "${springVersion}"
+    ext['spring-session.version'] = "${springSessionVersion}"
+    ext['spring-data-releasetrain.version'] = "${springDataVersion}"
+    ext['mysql.version'] = "${mysqlVersion}"
+    ext['log4j2.version'] = "${log4j2Version}"
+    ext['jackson.version'] = "${jacksonVersion}"
+    ext['ehcache.version'] = "${ehcacheVersion}"
+    ext['slf4j.version'] = "${slf4jVersion}"
+    ext['javassist.version'] = "${javassistVersion}"
+    ext['hibernate.version'] = "${hibernateVersion}"
+    ext['hibernate-validator.version'] = "${hibernateValidatorVersion}"
+    ext['tomcat.version'] = "${tomcatVersion}"
+    // 替换Spring Boot默认的版本
 
     apply plugin: 'groovy'
     apply plugin: 'io.spring.dependency-management'
 
     dependencyManagement {
         imports {
-            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
             mavenBom("org.springframework:spring-framework-bom:${springVersion}")
             mavenBom("org.springframework.security:spring-security-bom:${springSecurityVersion}")
             mavenBom("org.springframework.data:spring-data-releasetrain:${springDataVersion}")
+            mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
         }
     }
+
     apply plugin: "idea"
     apply plugin: "java"
 
-    idea {
-        module {
-            inheritOutputDirs = false
-            outputDir = file("$buildDir/classes/main/")
-        }
-    }
-
-    compileJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
-
-    compileTestJava {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     configurations {
         compile.exclude group: 'org.apache.geronimo.specs'
@@ -116,8 +131,6 @@ project("core") {
         compile("com.google.guava:guava:${guavaVersion}")
         compile("org.mybatis:mybatis:${mybatisVersion}")
         compile("org.mybatis:mybatis-spring:${mybatisSpringVersion}")
-        compile("org.apache.shiro:shiro-web:${shiroVersion}")
-        compile("org.apache.shiro:shiro-spring:${shiroVersion}")
         compile("com.squareup.okhttp3:okhttp:${okHttpVersion}")
         compile("com.fasterxml.jackson.core:jackson-core")
         compile("com.fasterxml.jackson.core:jackson-annotations")
@@ -158,6 +171,7 @@ project("webapp") {
         compile.exclude module: 'spring-boot-starter-logging'
         compile.exclude module: 'spring-boot-starter-tomcat'
         compile.exclude module: 'hibernate-entitymanager'
+        compile.exclude module: 'ehcache-core'
     }
 
     dependencies {
@@ -190,12 +204,9 @@ project("webapp") {
         compile("com.google.guava:guava:${guavaVersion}")
         compile("mysql:mysql-connector-java:${mysqlVersion}")
         compile("redis.clients:jedis:${jedisVersion}")
-        compile("org.apache.shiro:shiro-core:${shiroVersion}")
         compile("org.apache.shiro:shiro-spring:${shiroVersion}")
         compile("org.apache.shiro:shiro-web:${shiroVersion}")
-        compile("org.apache.shiro:shiro-ehcache:${shiroVersion}") {
-            exclude group: 'net.sf.ehcache', module: 'ehcache-core'
-        }
+        compile("org.apache.shiro:shiro-ehcache:${shiroVersion}")
         compile("org.hibernate:hibernate-core")
 
         // javax
