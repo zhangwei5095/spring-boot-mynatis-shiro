@@ -13,6 +13,81 @@ create database if not exists platform
 use platform;
 
 /* 组织表 */
+create table sys_entity (
+    id            int          not null auto_increment,
+    uid           varchar(255) not null,
+    type          varchar(255) not null,
+    syncInd       varchar(255),
+    syncTimestamp varchar(255),
+    createdAt     datetime,
+    createdBy     int,
+    updatedAt     datetime,
+    updatedBy     int,
+    constraint sys_entity_id primary key (id)
+);
+
+create table sys_organization (
+    id          int          not null,
+    code        varchar(255) not null,
+    title       varchar(255) not null,
+    description varchar(255) null,
+    constraint fk_sys_organization_id foreign key (id) references sys_entity (id)
+);
+
+create table sys_department (
+    id          int          not null,
+    code        varchar(255) not null,
+    title       varchar(255) not null,
+    description varchar(255) null,
+    constraint fk_sys_department_id foreign key (id) references sys_entity (id)
+);
+
+create table sys_position (
+    id          int          not null,
+    code        varchar(255) not null,
+    title       varchar(255) not null,
+    description varchar(255) null,
+    constraint fk_sys_position_id foreign key (id) references sys_entity (id)
+);
+
+create table sys_user (
+    id          int          not null,
+    username    varchar(255) not null,
+    email       varchar(255) not null,
+    mobile      varchar(255) not null,
+    salt        varchar(255) not null,
+    password    varchar(255) not null,
+    description varchar(255) null,
+    constraint fk_sys_user_id foreign key (id) references sys_entity (id)
+);
+
+create table sys_entity_relation (
+    id        int         not null auto_increment,
+    parentId  int         not null,
+    childId   int         not null,
+    level     int         not null,
+    parentInd int         not null,
+    type      varchar(50) not null,
+    createAt  timestamp   not null,
+    constraint pk_sys_entity_relation_id primary key (id),
+    constraint fk_sys_entity_relation_parent_id foreign key (parentId) references sys_entity (id),
+    constraint fk_sys_entity_relation_child_id foreign key (childId) references sys_entity (id)
+);
+
+/* =========================================================================== */
+create table sys_organizations (
+    org_id          int          not null auto_increment,
+    org_parent_id   int          not null,
+    org_code        varchar(255) not null,
+    org_title       varchar(255) not null,
+    org_description varchar(255),
+    org_created_at  datetime,
+    org_created_by  int,
+    org_updated_at  datetime,
+    org_updated_by  int,
+    constraint sys_organizations_id primary key (org_id)
+);
+
 drop table if exists sys_organizations;
 
 create table sys_organizations (
