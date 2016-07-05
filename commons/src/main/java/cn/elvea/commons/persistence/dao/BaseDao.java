@@ -19,9 +19,9 @@ import java.util.Map;
 
 @Repository
 public abstract class BaseDao {
-    JdbcTemplate jdbcTemplate;
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    DataSource dataSource;
+    protected JdbcTemplate jdbcTemplate;
+    protected NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    protected DataSource dataSource;
 
     @Autowired
     public void init(DataSource dataSource) {
