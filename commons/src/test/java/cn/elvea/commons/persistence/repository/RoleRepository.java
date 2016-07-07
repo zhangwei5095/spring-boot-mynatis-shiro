@@ -4,6 +4,6 @@ import cn.elvea.commons.domain.Role;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RoleRepository extends BaseEntityRepository<Role, Long> {
+public interface RoleRepository extends BaseEntityRepository<Role,Long> {
     Role findByCode(String code);
 }

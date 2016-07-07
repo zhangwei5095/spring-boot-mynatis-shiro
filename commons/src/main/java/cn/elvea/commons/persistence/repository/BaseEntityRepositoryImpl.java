@@ -30,18 +30,18 @@ import java.util.Map;
 
 @NoRepositoryBean
 @SuppressWarnings({"unchecked"})
-public class BaseRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRepository<T, PK> implements BaseRepository<T, PK> {
+public class BaseEntityRepositoryImpl<T, PK extends Serializable> extends SimpleJpaRepository<T, PK> implements BaseEntityRepository<T, PK> {
     private EntityManager entityManager = null;
     private JpaEntityInformation<T, ?> entityInformation = null;
 
-    public BaseRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseEntityRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
 
         this.entityManager = entityManager;
         this.entityInformation = entityInformation;
     }
 
-    public BaseRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
+    public BaseEntityRepositoryImpl(Class<T> domainClass, EntityManager entityManager) {
         this(JpaEntityInformationSupport.getEntityInformation(domainClass, entityManager), entityManager);
     }
 

@@ -2,7 +2,6 @@ package cn.elvea.commons.service.jpa;
 
 import cn.elvea.commons.domain.IdEntity;
 import cn.elvea.commons.persistence.repository.BaseEntityRepository;
-import cn.elvea.commons.persistence.repository.BaseRepository;
 import cn.elvea.commons.service.BaseEntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,7 @@ public abstract class BaseJpaEntityService<T extends IdEntity, PK extends Serial
     protected abstract BaseEntityRepository<T, PK> getEntityRepository();
 
     @Override
-    protected BaseRepository getRepository() {
+    protected BaseEntityRepository getRepository() {
         return getEntityRepository();
     }
 

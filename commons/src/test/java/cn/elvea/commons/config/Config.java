@@ -1,7 +1,10 @@
 package cn.elvea.commons.config;
 
-import cn.elvea.commons.persistence.repository.BaseRepositoryImpl;
+import cn.elvea.commons.persistence.repository.BaseEntityRepositoryImpl;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -12,6 +15,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -32,7 +36,8 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"cn.elvea"})
 @PropertySource("classpath:application.properties")
-@EnableJpaRepositories(basePackages = "cn.elvea.commons.persistence.repository", repositoryBaseClass = BaseRepositoryImpl.class)
+@MapperScan("cn.elvea.commons.persistence.mapper")
+@EnableJpaRepositories(basePackages = "cn.elvea.commons.persistence.repository", repositoryBaseClass = BaseEntityRepositoryImpl.class)
 public class Config implements TransactionManagementConfigurer {
     @Autowired
     Environment env;
@@ -93,6 +98,18 @@ public class Config implements TransactionManagementConfigurer {
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Bean
+    public SqlSessionFactory sessionFactory() {
+        try {
+            SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+            sqlSessionFactoryBean.setDataSource(dataSource());
+            sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
+            return sqlSessionFactoryBean.getObject();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Bean
