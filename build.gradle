@@ -51,7 +51,7 @@ allprojects {
     // 覆盖spring-boot-dependencies的版本定义,保持最新版本
     ext['spring.version'] = '4.3.1.RELEASE'
     ext['spring-session.version'] = '1.2.1.RELEASE'
-    ext['spring-security.version'] = '4.1.0.RELEASE'
+    ext['spring-security.version'] = '4.1.1.RELEASE'
     ext['spring-data-releasetrain.version'] = 'Hopper-SR2'
     ext['hibernate.version'] = '5.2.1.Final'
     ext['tomcat.version'] = '8.0.36'
