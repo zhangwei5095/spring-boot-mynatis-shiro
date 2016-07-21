@@ -94,8 +94,8 @@ public class SecurityConfig {
     @Bean(name = "realm")
     @DependsOn("lifecycleBeanPostProcessor")
     public AuthorizingRealm realm() {
-        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher(SecurityUtils.HASH_ALGORITHM);
-        credentialsMatcher.setHashIterations(SecurityUtils.HASH_INTERATIONS);
+        HashedCredentialsMatcher credentialsMatcher = new HashedCredentialsMatcher(SecurityConstants.HASH_ALGORITHM);
+        credentialsMatcher.setHashIterations(SecurityConstants.HASH_INTERATIONS);
 
         SecurityRealm securityRealm = new SecurityRealm();
         securityRealm.setCredentialsMatcher(credentialsMatcher);

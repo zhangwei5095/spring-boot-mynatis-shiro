@@ -9,10 +9,6 @@ import org.apache.shiro.subject.Subject;
  * 封装一些常用的Shiro操作
  */
 public class SecurityUtils {
-    public final static String HASH_ALGORITHM = "SHA-1";
-    public final static int HASH_INTERATIONS = 1024;
-    private final static int SALT_SIZE = 8;
-
     public static String getUsername() {
         Subject subject = getSubject();
         return null;
@@ -47,7 +43,7 @@ public class SecurityUtils {
     }
 
     public static String entryptPassword(String plainPassword, byte[] saltByte) {
-        byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), saltByte, HASH_INTERATIONS);
+        byte[] hashPassword = Digests.sha1(plainPassword.getBytes(), saltByte, SecurityConstants.HASH_INTERATIONS);
         return Encodes.encodeHex(hashPassword);
     }
 
@@ -55,6 +51,6 @@ public class SecurityUtils {
      * 生成一个随机的Salt,添加用户或者修改用户密码的时候,都会自动生成一个8位的随机数做为密码加密的盐
      */
     public static String generateSalt() {
-        return Encodes.encodeHex(Digests.generateSalt(SALT_SIZE));
+        return Encodes.encodeHex(Digests.generateSalt(SecurityConstants.SALT_SIZE));
     }
 }
