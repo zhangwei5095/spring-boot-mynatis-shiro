@@ -4,12 +4,11 @@ import cn.elvea.commons.domain.AbstractEntity;
 
 import java.sql.Timestamp;
 
-public class Resource extends AbstractEntity {
+public class Dict extends AbstractEntity {
     private Long id;
     private String code;
-    private String title;
+    private String name;
     private String description;
-    private String type;
     private Timestamp createdAt;
     private Long createdBy;
     private Timestamp updatedAt;
@@ -33,12 +32,12 @@ public class Resource extends AbstractEntity {
         this.code = code;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -47,14 +46,6 @@ public class Resource extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Timestamp getCreatedAt() {

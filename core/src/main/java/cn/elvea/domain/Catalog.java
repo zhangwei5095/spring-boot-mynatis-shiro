@@ -4,7 +4,7 @@ import cn.elvea.commons.domain.AbstractEntity;
 
 import java.sql.Timestamp;
 
-public class Resource extends AbstractEntity {
+public class Catalog extends AbstractEntity {
     private Long id;
     private String code;
     private String title;

@@ -2,7 +2,7 @@ package cn.elvea.config;
 
 import cn.elvea.Application;
 import cn.elvea.commons.persistence.datasource.DynamicDataSource;
-import cn.elvea.commons.persistence.repository.BaseRepositoryImpl;
+import cn.elvea.commons.persistence.repository.BaseEntityRepositoryImpl;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.filter.logging.Slf4jLogFilter;
 import com.alibaba.druid.filter.stat.StatFilter;
@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories(basePackages = {"cn.elvea.repository"}, repositoryBaseClass = BaseRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = {"cn.elvea.repository"}, repositoryBaseClass = BaseEntityRepositoryImpl.class)
 public class Config implements TransactionManagementConfigurer {
     private static final Logger logger = LoggerFactory.getLogger(Config.class);
 

@@ -1,14 +1,14 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.BaseEntity;
+import cn.elvea.commons.domain.AbstractEntity;
 
 import java.sql.Timestamp;
 
-public class UserGroup extends BaseEntity {
+public class DictItem extends AbstractEntity {
     private Long id;
-    private Long parentId;
-    private String code;
-    private String title;
+    private Long dictId;
+    private String key;
+    private String value;
     private String description;
     private Timestamp createdAt;
     private Long createdBy;
@@ -25,28 +25,28 @@ public class UserGroup extends BaseEntity {
         this.id = id;
     }
 
-    public Long getParentId() {
-        return parentId;
+    public Long getDictId() {
+        return dictId;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setDictId(Long dictId) {
+        this.dictId = dictId;
     }
 
-    public String getCode() {
-        return code;
+    public String getKey() {
+        return key;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getTitle() {
-        return title;
+    public String getValue() {
+        return value;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public String getDescription() {

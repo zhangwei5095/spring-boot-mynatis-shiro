@@ -1,26 +1,32 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.BaseEntity;
+import cn.elvea.commons.domain.AbstractEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * 用户会话实体类
  */
-@Entity
-@Table(name = "userSession")
-public class UserSession extends BaseEntity {
+public class UserSession extends AbstractEntity {
+    private Long id;
     private String sessionId;
     private String username;
     private String host;
+    private String device;
     private Date lastAccessDatetime;
     private Date startDatetime;
     private Date endDatetime;
 
-    @Column(nullable = false)
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getSessionId() {
         return sessionId;
     }
@@ -29,7 +35,6 @@ public class UserSession extends BaseEntity {
         this.sessionId = sessionId;
     }
 
-    @Column(nullable = false)
     public String getUsername() {
         return username;
     }
@@ -38,7 +43,6 @@ public class UserSession extends BaseEntity {
         this.username = username;
     }
 
-    @Column(nullable = false)
     public String getHost() {
         return host;
     }
@@ -47,7 +51,14 @@ public class UserSession extends BaseEntity {
         this.host = host;
     }
 
-    @Column(nullable = false)
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
+
     public Date getLastAccessDatetime() {
         return lastAccessDatetime;
     }
@@ -56,7 +67,6 @@ public class UserSession extends BaseEntity {
         this.lastAccessDatetime = lastAccessDatetime;
     }
 
-    @Column(nullable = false)
     public Date getStartDatetime() {
         return startDatetime;
     }
@@ -65,7 +75,6 @@ public class UserSession extends BaseEntity {
         this.startDatetime = startDatetime;
     }
 
-    @Column(nullable = false)
     public Date getEndDatetime() {
         return endDatetime;
     }

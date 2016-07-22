@@ -1,185 +1,130 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.BaseEntity;
 import com.google.common.collect.Lists;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * 用户实体类
  */
-@Entity
-@Table(name = "USERS")
-public class User extends BaseEntity {
-    public static final String SOURCE_SYS = "SYS"; // 系统账号(不允许删除)
-    public static final String SOURCE_IMP = "IMP"; // 导入的账号
-    public static final String SOURCE_NORMAL = "NORMAL"; // 正常添加的账号
-    public static final String SOURCE_WEB = "WEB"; // PC端注册账号
-    public static final String SOURCE_APP = "APP"; // 移动端注册账号
-
+public class User extends Entity {
     public static final String STATUS_PENDING = "PENDING";
     public static final String STATUS_FREEZED = "FREEZED";
     public static final String STATUS_EXPIRED = "EXPIRED";
     public static final String STATUS_DELETED = "DELETED";
     public static final String STATUS_OK = "OK";
 
-    @Column
-    private String username;
+    private Long username;
+    private Long email;
+    private Long mobile;
+    private Long password;
+    private Long salt;
+    private Long nickname;
+    private Long fullname;
+    private Long description;
+    private Long status;
+    private Long source;
+    private Long lastLoginStatus;
+    private Long lastLoginDatetime;
 
-    @Column
-    private String email;
-    private String mobile;
-    private String password;
-    private String salt;
-    private String nickname;
-    private String fullname;
-    private String description;
-    private Timestamp startDate;
-    private Timestamp endDate;
-    private String status;
-    private String sourse;
-    private Timestamp createdAt;
-    private int createdBy;
-    private Timestamp updatedAt;
-    private int updatedBy;
-
-    @Transient
     private List<Role> roles = Lists.newArrayList();
 
-    public User() {
-    }
-
-    public String getUsername() {
+    public Long getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(Long username) {
         this.username = username;
     }
 
-    public String getEmail() {
+    public Long getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(Long email) {
         this.email = email;
     }
 
-    public String getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile) {
+    public void setMobile(Long mobile) {
         this.mobile = mobile;
     }
 
-    public String getPassword() {
+    public Long getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Long password) {
         this.password = password;
     }
 
-    public String getSalt() {
+    public Long getSalt() {
         return salt;
     }
 
-    public void setSalt(String salt) {
+    public void setSalt(Long salt) {
         this.salt = salt;
     }
 
-    public String getNickname() {
+    public Long getNickname() {
         return nickname;
     }
 
-    public void setNickname(String nickname) {
+    public void setNickname(Long nickname) {
         this.nickname = nickname;
     }
 
-    public String getFullname() {
+    public Long getFullname() {
         return fullname;
     }
 
-    public void setFullname(String fullname) {
+    public void setFullname(Long fullname) {
         this.fullname = fullname;
     }
 
-    public String getDescription() {
+    public Long getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Long description) {
         this.description = description;
     }
 
-    public Timestamp getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Timestamp startDate) {
-        this.startDate = startDate;
-    }
-
-    public Timestamp getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Timestamp endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 
-    public String getSourse() {
-        return sourse;
+    @Override
+    public Long getSource() {
+        return source;
     }
 
-    public void setSourse(String sourse) {
-        this.sourse = sourse;
+    @Override
+    public void setSource(Long source) {
+        this.source = source;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public Long getLastLoginStatus() {
+        return lastLoginStatus;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setLastLoginStatus(Long lastLoginStatus) {
+        this.lastLoginStatus = lastLoginStatus;
     }
 
-    public int getCreatedBy() {
-        return createdBy;
+    public Long getLastLoginDatetime() {
+        return lastLoginDatetime;
     }
 
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public int getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(int updatedBy) {
-        this.updatedBy = updatedBy;
+    public void setLastLoginDatetime(Long lastLoginDatetime) {
+        this.lastLoginDatetime = lastLoginDatetime;
     }
 
     public List<Role> getRoles() {

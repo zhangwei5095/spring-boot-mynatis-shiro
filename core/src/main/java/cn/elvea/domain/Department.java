@@ -1,9 +1,6 @@
 package cn.elvea.domain;
 
-/**
- * 角色实体类
- */
-public class Role extends Entity {
+public class Department extends Entity {
     private String code;
     private String title;
     private String description;
@@ -32,3 +29,4 @@ public class Role extends Entity {
         this.description = description;
     }
 }
+

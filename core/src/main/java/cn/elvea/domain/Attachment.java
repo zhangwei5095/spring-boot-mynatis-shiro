@@ -4,12 +4,11 @@ import cn.elvea.commons.domain.AbstractEntity;
 
 import java.sql.Timestamp;
 
-public class Resource extends AbstractEntity {
+public class Attachment extends AbstractEntity {
     private Long id;
-    private String code;
-    private String title;
+    private String uuid;
+    private String filename;
     private String description;
-    private String type;
     private Timestamp createdAt;
     private Long createdBy;
     private Timestamp updatedAt;
@@ -25,20 +24,20 @@ public class Resource extends AbstractEntity {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
-    public String getTitle() {
-        return title;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     public String getDescription() {
@@ -47,14 +46,6 @@ public class Resource extends AbstractEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Timestamp getCreatedAt() {
