@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class RoleService extends BaseEntityServiceImpl<Role, Long> {
+public class RoleServiceImpl extends BaseEntityServiceImpl<Role, Long> {
     @Autowired
     private RoleRepository roleRepository;
 

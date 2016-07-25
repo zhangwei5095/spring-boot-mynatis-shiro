@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class PermissionService extends BaseEntityServiceImpl<Permission, Long> {
+public class PermissionServiceImpl extends BaseEntityServiceImpl<Permission, Long> {
     @Autowired
     private PermissionRepository permissionRepository;
 

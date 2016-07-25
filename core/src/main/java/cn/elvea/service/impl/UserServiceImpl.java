@@ -5,6 +5,7 @@ import cn.elvea.commons.service.jpa.BaseEntityServiceImpl;
 import cn.elvea.domain.User;
 import cn.elvea.repository.UserRepository;
 import cn.elvea.security.SecurityUtils;
+import cn.elvea.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,7 @@ import org.springframework.util.Assert;
 
 @Service
 @Transactional
-public class UserService extends BaseEntityServiceImpl<User, Long> {
+public class UserServiceImpl extends BaseEntityServiceImpl<User, Long> implements UserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -21,10 +22,12 @@ public class UserService extends BaseEntityServiceImpl<User, Long> {
         return this.userRepository;
     }
 
+    @Override
     public User findByUsername(String username) {
         return userRepository.findByEmployeeNumber(username);
     }
 
+    @Override
     public String encryptPassword(String plainPassword, String salt) {
         Assert.notNull(plainPassword, "plainPassword can not be null.");
         Assert.notNull(salt, "salt can not be null.");
@@ -32,6 +35,7 @@ public class UserService extends BaseEntityServiceImpl<User, Long> {
         return SecurityUtils.entryptPassword(plainPassword, salt);
     }
 
+    @Override
     public String encryptPassword(User user) {
         Assert.notNull(user, "User can not be null.");
         return encryptPassword("", "");
