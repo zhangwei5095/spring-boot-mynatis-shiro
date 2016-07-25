@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component("application")
 public class Application {
-    // 系统默认编码
-    public final static String ENCODING = "UTF-8";
-
     // 应用是否启用调试模式
     public static boolean DEBUG = false;
 

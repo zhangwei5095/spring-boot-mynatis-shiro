@@ -1,26 +1,16 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class ResourceAccess extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class ResourceAccess extends BaseEntity {
     private String accessType;
     private Long accessRoleId;
     private Long accessEntityId;
     private Timestamp createdAt;
     private Long createdBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getAccessType() {
         return accessType;

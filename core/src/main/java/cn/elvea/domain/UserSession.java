@@ -7,6 +7,7 @@ import java.util.Date;
 /**
  * 用户会话实体类
  */
+@javax.persistence.Entity
 public class UserSession extends AbstractEntity {
     private Long id;
     private String sessionId;

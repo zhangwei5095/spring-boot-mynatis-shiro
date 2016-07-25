@@ -1,25 +1,15 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class EntityPermission extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class EntityPermission extends BaseEntity {
     private Long entityId;
     private Long permissionId;
     private Timestamp createdAt;
     private Long createdBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getEntityId() {
         return entityId;

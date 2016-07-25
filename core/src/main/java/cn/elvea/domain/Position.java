@@ -3,6 +3,7 @@ package cn.elvea.domain;
 /**
  * 职级实体类
  */
+@javax.persistence.Entity
 public class Position extends Entity {
     private String code;
     private String title;

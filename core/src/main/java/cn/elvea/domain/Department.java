@@ -1,5 +1,6 @@
 package cn.elvea.domain;
 
+@javax.persistence.Entity
 public class Department extends Entity {
     private String code;
     private String title;

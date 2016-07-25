@@ -1,11 +1,12 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 /**
  * 权限实体类
  */
-public class Permission extends AbstractEntity {
+@javax.persistence.Entity
+public class Permission extends BaseEntity {
     private Long id;
     private String code;
     private String title;

@@ -1,8 +1,9 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
-public class Entity extends AbstractEntity {
+@javax.persistence.Entity
+public class Entity extends BaseEntity {
     // 实体类型
     public final static String TYPE_ROL = "ROL"; // 角色
     public final static String TYPE_USR = "USR"; // 用户
@@ -18,8 +19,6 @@ public class Entity extends AbstractEntity {
     public final static String SOURCE_WEB = "WEB"; // 页面注册
     public final static String SOURCE_APP = "REG"; // 移动端注册
 
-    // ID
-    private Long id;
     // 唯一编号
     private Long uid;
     // 来源
@@ -38,16 +37,6 @@ public class Entity extends AbstractEntity {
     private Long deletedAt;
     // 删除人
     private Long deletedBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getUid() {
         return uid;

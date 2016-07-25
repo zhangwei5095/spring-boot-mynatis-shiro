@@ -1,11 +1,11 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class Catalog extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class Catalog extends BaseEntity {
     private String code;
     private String title;
     private String description;
@@ -14,16 +14,6 @@ public class Catalog extends AbstractEntity {
     private Long createdBy;
     private Timestamp updatedAt;
     private Long updatedBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCode() {
         return code;

@@ -1,39 +1,12 @@
 package cn.elvea.service;
 
-import cn.elvea.commons.persistence.repository.BaseEntityRepository;
-import cn.elvea.commons.service.jpa.BaseJpaEntityService;
+import cn.elvea.commons.service.BaseEntityService;
 import cn.elvea.domain.User;
-import cn.elvea.repository.UserRepository;
-import cn.elvea.security.SecurityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
-@Service
-@Transactional
-public class UserService extends BaseJpaEntityService<User, Long> {
-    @Autowired
-    private UserRepository userRepository;
+public interface UserService extends BaseEntityService<User, Long> {
+    User findByUsername(String username);
 
-    @Override
-    protected BaseEntityRepository<User, Long> getEntityRepository() {
-        return this.userRepository;
-    }
+    String encryptPassword(String plainPassword, String salt);
 
-    public User findByUsername(String username) {
-        return userRepository.findByEmployeeNumber(username);
-    }
-
-    public String encryptPassword(String plainPassword, String salt) {
-        Assert.notNull(plainPassword, "plainPassword can not be null.");
-        Assert.notNull(salt, "salt can not be null.");
-
-        return SecurityUtils.entryptPassword(plainPassword, salt);
-    }
-
-    public String encryptPassword(User user) {
-        Assert.notNull(user, "User can not be null.");
-        return encryptPassword("", "");
-    }
+    String encryptPassword(User user);
 }

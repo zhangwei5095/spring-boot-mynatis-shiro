@@ -3,6 +3,7 @@ package cn.elvea.domain;
 /**
  * 角色实体类
  */
+@javax.persistence.Entity
 public class Role extends Entity {
     private String code;
     private String title;

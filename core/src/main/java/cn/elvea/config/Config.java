@@ -1,6 +1,6 @@
 package cn.elvea.config;
 
-import cn.elvea.Application;
+import cn.elvea.Constants;
 import cn.elvea.commons.persistence.datasource.DynamicDataSource;
 import cn.elvea.commons.persistence.repository.BaseEntityRepositoryImpl;
 import com.alibaba.druid.filter.Filter;
@@ -58,7 +58,7 @@ public class Config implements TransactionManagementConfigurer {
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages/messages");
-        messageSource.setDefaultEncoding(Application.ENCODING);
+        messageSource.setDefaultEncoding(Constants.ENCODING);
         return messageSource;
     }
 

@@ -1,27 +1,17 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class CatalogRelation extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class CatalogRelation extends BaseEntity {
     private Long parentId;
     private Long childId;
     private boolean parentInd;
     private int level;
     private Timestamp createdAt;
     private Long createdBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getParentId() {
         return parentId;

@@ -1,11 +1,11 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class DictItem extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class DictItem extends BaseEntity {
     private Long dictId;
     private String key;
     private String value;
@@ -14,16 +14,6 @@ public class DictItem extends AbstractEntity {
     private Long createdBy;
     private Timestamp updatedAt;
     private Long updatedBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Long getDictId() {
         return dictId;

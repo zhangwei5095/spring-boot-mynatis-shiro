@@ -1,10 +1,11 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class Resource extends AbstractEntity {
+@javax.persistence.Entity
+public class Resource extends BaseEntity {
     private Long id;
     private String code;
     private String title;

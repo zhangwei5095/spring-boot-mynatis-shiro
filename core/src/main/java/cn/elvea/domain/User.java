@@ -2,11 +2,13 @@ package cn.elvea.domain;
 
 import com.google.common.collect.Lists;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * 用户实体类
  */
+@javax.persistence.Entity
 public class User extends Entity {
     public static final String STATUS_PENDING = "PENDING";
     public static final String STATUS_FREEZED = "FREEZED";
@@ -14,116 +16,105 @@ public class User extends Entity {
     public static final String STATUS_DELETED = "DELETED";
     public static final String STATUS_OK = "OK";
 
-    private Long username;
-    private Long email;
-    private Long mobile;
-    private Long password;
-    private Long salt;
-    private Long nickname;
-    private Long fullname;
-    private Long description;
-    private Long status;
-    private Long source;
-    private Long lastLoginStatus;
-    private Long lastLoginDatetime;
+    private String username;
+    private String email;
+    private String mobile;
+    private String password;
+    private String salt;
+    private String nickname;
+    private String fullname;
+    private String description;
+    private String status;
+    private String lastLoginStatus;
+    private Timestamp lastLoginDatetime;
 
     private List<Role> roles = Lists.newArrayList();
 
-    public Long getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(Long username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public Long getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(Long email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public Long getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(Long mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public Long getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(Long password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public Long getSalt() {
+    public String getSalt() {
         return salt;
     }
 
-    public void setSalt(Long salt) {
+    public void setSalt(String salt) {
         this.salt = salt;
     }
 
-    public Long getNickname() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(Long nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    public Long getFullname() {
+    public String getFullname() {
         return fullname;
     }
 
-    public void setFullname(Long fullname) {
+    public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
-    public Long getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Long description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Long getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    @Override
-    public Long getSource() {
-        return source;
-    }
-
-    @Override
-    public void setSource(Long source) {
-        this.source = source;
-    }
-
-    public Long getLastLoginStatus() {
+    public String getLastLoginStatus() {
         return lastLoginStatus;
     }
 
-    public void setLastLoginStatus(Long lastLoginStatus) {
+    public void setLastLoginStatus(String lastLoginStatus) {
         this.lastLoginStatus = lastLoginStatus;
     }
 
-    public Long getLastLoginDatetime() {
+    public Timestamp getLastLoginDatetime() {
         return lastLoginDatetime;
     }
 
-    public void setLastLoginDatetime(Long lastLoginDatetime) {
+    public void setLastLoginDatetime(Timestamp lastLoginDatetime) {
         this.lastLoginDatetime = lastLoginDatetime;
     }
 

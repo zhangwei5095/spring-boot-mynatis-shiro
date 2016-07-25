@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 @Transactional
-public abstract class BaseJpaEntityService<T extends IdEntity, PK extends Serializable> extends BaseJpaService implements BaseEntityService<T, PK> {
+public abstract class BaseEntityServiceImpl<T extends IdEntity, PK extends Serializable> extends BaseServiceImpl implements BaseEntityService<T, PK> {
     protected abstract BaseEntityRepository<T, PK> getEntityRepository();
 
     @Override

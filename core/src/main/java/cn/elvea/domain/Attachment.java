@@ -1,11 +1,11 @@
 package cn.elvea.domain;
 
-import cn.elvea.commons.domain.AbstractEntity;
+import cn.elvea.commons.domain.BaseEntity;
 
 import java.sql.Timestamp;
 
-public class Attachment extends AbstractEntity {
-    private Long id;
+@javax.persistence.Entity
+public class Attachment extends BaseEntity {
     private String uuid;
     private String filename;
     private String description;
@@ -13,16 +13,6 @@ public class Attachment extends AbstractEntity {
     private Long createdBy;
     private Timestamp updatedAt;
     private Long updatedBy;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getUuid() {
         return uuid;

@@ -3,6 +3,7 @@ package cn.elvea.domain;
 /**
  * 组织架构实体类
  */
+@javax.persistence.Entity
 public class Organization extends Entity {
     private String code;
     private String title;
