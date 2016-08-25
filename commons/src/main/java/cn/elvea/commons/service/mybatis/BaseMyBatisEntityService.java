@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 
 @Transactional
-public abstract class BaseEntityServiceImpl<T extends IdEntity, PK extends Serializable> extends BaseServiceImpl implements BaseEntityService<T, PK> {
+public abstract class BaseMyBatisEntityService<T extends IdEntity, PK extends Serializable> extends BaseMybatisService implements BaseEntityService<T, PK> {
     protected abstract BaseEntityMapper<T, PK> getEntityMapper();
 
     @Override

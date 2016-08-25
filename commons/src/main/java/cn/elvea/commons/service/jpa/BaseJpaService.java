@@ -5,7 +5,7 @@ import cn.elvea.commons.service.BaseService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public abstract class BaseServiceImpl implements BaseService {
+public abstract class BaseJpaService implements BaseService {
     protected BaseEntityRepository repository;
 
     protected abstract BaseEntityRepository getRepository();

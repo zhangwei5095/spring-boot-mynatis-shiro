@@ -22,7 +22,7 @@ public class CaptchaServlet extends HttpServlet {
     public static final String CAPTCHA = "captcha";
 
     private int width = 120;
-    private int height = 25;
+    private int height = 30;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -79,7 +79,7 @@ public class CaptchaServlet extends HttpServlet {
 
         // 生成随机数,并将随机数字转换为字母
         String sRand = "";
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 6; i++) {
             int itmp = random.nextInt(26) + 65;
             char ctmp = (char) itmp;
             sRand += String.valueOf(ctmp);

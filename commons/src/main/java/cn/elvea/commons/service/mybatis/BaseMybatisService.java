@@ -5,7 +5,7 @@ import cn.elvea.commons.service.BaseService;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public abstract class BaseServiceImpl implements BaseService {
+public abstract class BaseMybatisService implements BaseService {
     protected BaseMapper mapper;
 
     protected abstract BaseMapper getMapper();

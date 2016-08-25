@@ -117,19 +117,34 @@ public class BaseEntityRepositoryImpl<T, PK extends Serializable> extends Simple
     @Override
     public <E> E queryForObject(final String jpql) {
         Query query = createQuery(jpql, new Object[]{});
-        return (E) query.getSingleResult();
+        List<E> result = query.getResultList();
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result.get(0);
+        }
     }
 
     @Override
     public <E> E queryForObject(final String jpql, final Object[] params) {
         Query query = createQuery(jpql, params);
-        return (E) query.getSingleResult();
+        List<E> result = query.getResultList();
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result.get(0);
+        }
     }
 
     @Override
     public <E> E queryForObject(final String jpql, final Map<String, Object> params) {
         Query query = createQuery(jpql, params);
-        return (E) query.getSingleResult();
+        List<E> result = query.getResultList();
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result.get(0);
+        }
     }
 
     @Override

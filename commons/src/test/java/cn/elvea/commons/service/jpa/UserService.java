@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Service
 @Transactional
-public class UserService extends BaseEntityServiceImpl<User, Long> {
+public class UserService extends BaseJpaEntityService<User, Long> {
     @Autowired
     UserRepository userRepository;
 
