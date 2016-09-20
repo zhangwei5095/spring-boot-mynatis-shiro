@@ -4,3 +4,6 @@
 *.iml
 /build
 /webapp/build
+/webapp/bower_components
+/webapp/node_modules
+/*/build

@@ -1,0 +1,19 @@
+{
+    "name" : "webapp",
+    "version" : "0.0.1",
+    "private" : true,
+    "devDependencies" : {
+        "gulp" : "~*",
+        "del" : "~*",
+        "gulp-minify-css" : "~*",
+        "gulp-bower" : "~*",
+        "gulp-ejs" : "~*",
+        "gulp-webserver" : "~*",
+        "gulp-less" : "~*",
+        "gulp-jshint" : "~*",
+        "gulp-sourcemaps" : "~*",
+        "gulp-rename" : "~*",
+        "gulp-uglify" : "~*",
+        "gulp-concat" : "~*"
+    }
+}
